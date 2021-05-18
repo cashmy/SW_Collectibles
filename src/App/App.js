@@ -4,6 +4,7 @@ import jwtDecode  from "jwt-decode";
 import AppBar from '../components/AppBar/AppBar.js';
 import Footer from '../components/Footer/Footer.js';
 import Profile from '../components/Profile/Profile.js';
+import ProductList from '../components/ProductList/ProductList.js';
 import SignInSide from '../components/SignInSide/SignInSide.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -34,6 +35,7 @@ class App extends Component {
                 }
               }}
             />
+            <Route exact={true} path="/productList" component={ProductList} />
             <SignInSide />
           </Switch>
           <Footer />

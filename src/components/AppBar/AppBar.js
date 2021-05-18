@@ -1,4 +1,5 @@
-                         import React from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -203,7 +204,10 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
 
-            <Button aria-label="product list" color="inherit">Products</Button>
+            <Link to={'productList'}>
+              <Button aria-label="product list" color="inherit">Products</Button>
+            </Link>
+
             <Button aria-label="order history" color="inherit">Orders</Button>
             
             <IconButton aria-label="show 5 cart items" color="inherit">
