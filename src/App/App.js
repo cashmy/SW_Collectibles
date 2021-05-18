@@ -8,6 +8,8 @@ import ProductList from '../components/ProductList/ProductList.js';
 import SignInSide from '../components/SignInSide/SignInSide.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProductsDetailView from '../components/ProductsDetailPage/ProductsDetailView';
+import OrderList from '../components/OrderList/OrderList'
+import OrderDetails from '../components/OrderDetails/OrderDetails'
 
 class App extends Component {
   state = {}
@@ -36,8 +38,11 @@ class App extends Component {
               }}
             />
         
-            <Route exact path="/productDetails" component={ProductsDetailView} />
+       
+            <Route exact={true} path="/productDetails" component={ProductsDetailView} />
             <Route exact={true} path="/productList" component={ProductList} />
+            <Route exact={true} path="/orderDetails" component={OrderDetails}/>
+            <Route exact={true} path="/orderList" component={OrderList} />
             <SignInSide />
           </Switch>
           <Footer />
