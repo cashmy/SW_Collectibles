@@ -4,10 +4,10 @@ import jwtDecode  from "jwt-decode";
 import AppBar from '../components/AppBar/AppBar.js';
 import Footer from '../components/Footer/Footer.js';
 import Profile from '../components/Profile/Profile.js';
+import ProductList from '../components/ProductList/ProductList.js';
 import SignInSide from '../components/SignInSide/SignInSide.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ProductsDetailView from '../components/ProductsDetailPage/ProductsDetailView.jsx';
-
+import ProductsDetailView from '../components/ProductsDetailPage/ProductDetailView';
 
 class App extends Component {
   state = {}
@@ -35,7 +35,8 @@ class App extends Component {
                 }
               }}
             />
-            <Route path="/productDetails" component={ProductsDetailView} />
+            <Route exact path="/productDetails" component={ProductsDetailView} />
+            <Route exact={true} path="/productList" component={ProductList} />
             <SignInSide />
           </Switch>
           <Footer />
