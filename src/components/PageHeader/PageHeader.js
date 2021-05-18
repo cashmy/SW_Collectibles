@@ -3,36 +3,53 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { yellow } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        margin: theme.spacing(1.5),
         flexGrow: 1,
+    },
+    pageHeader: {
+        padding: theme.spacing(1),
+        display: 'flex',
+        marginBottom: theme.spacing(1),
       },
-      grid: {
-        padding: theme.spacing(2.5),
+      pageIcon: {
+        display: 'inline-block',
+        padding: theme.spacing(2),
+        color: theme.palette.primary.light,
       },
-      paper: {
-        margin: theme.spacing(2.5),
+      pageTitle: {
+          paddingLeft: theme.spacing(4),
+          '& .MuiTypography-subtitle2': {
+              opacity: '0.6'
+          }
       },
 }));
 
 export default function PageHeader(props) {
     
+    const {title, subtitle, icon} = props
     const classes = useStyles();
+
     return (
-        <div>
-                <Paper elevation={3} className={classes.paper}> 
-            <Grid container className={classes.grid} >
-                    <Grid item style={{paddingLeft: 8}}>
-                        Icon
-                    </Grid>
-                    <Grid item style={{paddingLeft: 24}}>
-                        <Typography>
-                            Page Header
-                        </Typography>
-                    </Grid>
-            </Grid>
-                </Paper>
+        <div className={classes.root}>
+            <Paper elevation={3} > 
+                <Grid container className={classes.pageHeader} >
+                        <Grid item className={classes.pageIcon}>
+                            {icon}
+                        </Grid>
+                        <Grid item className={classes.pageTitle}>
+                            <Typography variant="h6" >
+                                {title}
+                            </Typography>
+                            <Typography variant="subtitle2" >
+                                {subtitle}
+                            </Typography>
+                        </Grid>
+                </Grid>
+            </Paper>
         </div>
     )
 }

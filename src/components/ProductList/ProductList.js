@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
+import ListIcon from '@material-ui/icons/List';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,7 +46,11 @@ export default function BasicTable() {
 
   return (
       <div>
-      <PageHeader />    
+      <PageHeader 
+        title="Product List"
+        subtitle="Complete list of all available products for sale."
+        icon={<ListIcon/>}
+      />    
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>

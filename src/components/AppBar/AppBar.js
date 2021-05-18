@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom'
+import { Link as RouterLink, NavLink } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,10 +17,12 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-// import HistoryIcon from '@material-ui/icons/History';
+import HistoryIcon from '@material-ui/icons/History';
 import ListIcon from '@material-ui/icons/List';
 // import ShowChartIcon from '@material-ui/icons/ShowChart';
 import Controls from '../controls/Controls';
+import Link from '@material-ui/core/Link';
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -194,11 +196,11 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <NavLink to={''} className={classes.navlink}>
+          <Link component={RouterLink} to={''} className={classes.navlink}>
             <Typography className={classes.title} variant="h6" noWrap>
               Star Wars Collectibles
             </Typography>
-          </NavLink>
+          </Link>
 
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -218,13 +220,23 @@ export default function PrimarySearchAppBar() {
 
 
 
-          {/* Conditional Links */}
-            <NavLink to={'productList'} className={classes.navlink} >
-              <Controls.Button aria-label="product list" color="primary.light" text="Products">Products</Controls.Button>
-            </NavLink>
-            <NavLink to={'OrderList'} className={classes.navlink} >
-              <Controls.Button aria-label="order history" color="primary.light" text="Orders">Orders</Controls.Button>
-            </NavLink>
+          {/* BUYER: Conditional Links */}
+            <Link component={RouterLink} to={'productList'}  >
+              <Controls.Button 
+                aria-label="product list" 
+                color="primary.light" 
+                text="Products"
+                startIcon={<ListIcon />}
+              >Products</Controls.Button>
+            </Link>
+            <Link component={RouterLink} to={'OrderList'}  >
+              <Controls.Button 
+                aria-label="order history" 
+                color="primary.light" 
+                text="Orders" 
+                startIcon={<HistoryIcon 
+              />}>Orders</Controls.Button>
+            </Link>
 
           {/* Icons with Badges */}
             <IconButton aria-label="show 5 cart items" color="inherit">
