@@ -1,5 +1,5 @@
 import React from "react";
-import Controls from '../components/controls.Controls'
+import Controls from '../controls/Controls'
 
 
 

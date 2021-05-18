@@ -34,8 +34,9 @@ class App extends Component {
                 }
               }}
             />
+                <Route path="/productDetails" component={ProductDetailView} />
             <SignInSide />
-            <Route path="/productDetails" component={ProductDetailView} />
+        
           </Switch>
           <Footer />
       </div>
