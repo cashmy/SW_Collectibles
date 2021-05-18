@@ -185,9 +185,11 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
+        <Link to ={ '' }>
           <Typography className={classes.title} variant="h6" noWrap>
             Star Wars Collectibles
           </Typography>
+          </Link>
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -207,9 +209,9 @@ export default function PrimarySearchAppBar() {
             <Link to={'productList'}>
               <Button aria-label="product list" color="inherit">Products</Button>
             </Link>
-
+            <Link to = {'orderList'}>
             <Button aria-label="order history" color="inherit">Orders</Button>
-            
+            </Link>
             <IconButton aria-label="show 5 cart items" color="inherit">
               <Badge badgeContent={5} color="secondary">
                 <ShoppingCartIcon />
