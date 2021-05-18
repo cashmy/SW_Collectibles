@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer.js';
 import Profile from '../components/Profile/Profile.js';
 import SignInSide from '../components/SignInSide/SignInSide.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import ProductsDetailView from '../components/ProductsDetailPage/ProductsDetailView.jsx';
 
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
                 }
               }}
             />
+            <Route path="/productDetails" component={ProductsDetailView} />
             <SignInSide />
           </Switch>
           <Footer />
