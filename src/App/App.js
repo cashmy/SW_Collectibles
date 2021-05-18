@@ -7,7 +7,7 @@ import Profile from '../components/Profile/Profile.js';
 import ProductList from '../components/ProductList/ProductList.js';
 import SignInSide from '../components/SignInSide/SignInSide.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ProductDetailView from '../components/ProductsDetailPage/ProductDetailView'
+import ProductsDetailView from '../components/ProductsDetailPage/ProductsDetailView';
 
 class App extends Component {
   state = {}
@@ -35,10 +35,10 @@ class App extends Component {
                 }
               }}
             />
-                <Route path="/productDetails" component={ProductDetailView} />
+        
+            <Route exact path="/productDetails" component={ProductsDetailView} />
             <Route exact={true} path="/productList" component={ProductList} />
             <SignInSide />
-        
           </Switch>
           <Footer />
       </div>
