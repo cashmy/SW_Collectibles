@@ -43,22 +43,25 @@ function OrderDetails(){
         icon={<HistoryIcon/>}
       /> 
           
-        <div><center style={{marginTop: "2rem"}}><Paper style={{width: "20%"}}>Order Number</Paper></center></div>
+        <div><center style={{marginTop: "2rem"}}>Order Number</center></div>
 
                
-      <Grid container spacing={2} className={classes.grid} >
+        <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
           <Grid item xs={3} style={{marginBottom: "2rem"}}>
-            6311 Plum Rose Dr. 
+            Address Line 1 & address line 2
           </Grid>
-          <Grid item xs={3} style={{marginBottom: "2rem"}} align="center">
-          Tuttle
+          <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
+          Town
           </Grid>
-          <Grid item xs={3} style={{marginBottom: "2rem"}} align="center">
-              OK
+          <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
+              State
           </Grid>
-          <Grid item xs={3} style={{marginBottom: "2rem"}} align="center">
-            73089
+          <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
+            Zipcode
+          </Grid>
+          <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
+            Country
           </Grid>
 
             <TableContainer>
