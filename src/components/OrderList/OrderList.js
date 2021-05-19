@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
+import HistoryIcon from '@material-ui/icons/History';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +47,11 @@ export default function BasicTable() {
 
   return (
       <div>
-      <PageHeader />    
+      <PageHeader 
+        title="Order History"
+        subtitle="Full listing of all your complete orders."
+        icon={<HistoryIcon/>}
+      />     
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>
@@ -56,7 +61,6 @@ export default function BasicTable() {
                         <TableCell>OrderID</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="right">Date</TableCell>
-                        <TableCell align="right">Order Details</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
                     </TableHead>
@@ -68,10 +72,12 @@ export default function BasicTable() {
                         </TableCell>
                         <TableCell align="right">{row.price}</TableCell>
                         <TableCell align="right">{row.date}</TableCell>
-                        <TableCell align="right">{row.actions}</TableCell>
+                        <TableCell align="right">                       
                         <Link to = {'orderDetails'}>
-                        Order Details
-                        </Link>
+                          Order Details
+                        </Link></TableCell>
+
+ 
                         </TableRow>
                     ))}
                     </TableBody>

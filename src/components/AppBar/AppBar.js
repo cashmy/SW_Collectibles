@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link as RouterLink, NavLink } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -19,7 +19,10 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HistoryIcon from '@material-ui/icons/History';
 import ListIcon from '@material-ui/icons/List';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
+// import ShowChartIcon from '@material-ui/icons/ShowChart';
+import Controls from '../controls/Controls';
+import Link from '@material-ui/core/Link';
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -83,6 +86,14 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  navlink: {
+    color: 'white',
+    listStyle: 'none',
+    position: 'relative',
+    '& current': {
+      borderBottom: '1px solid black'
+    }
+  }
 }));
 
 export default function PrimarySearchAppBar() {
@@ -185,11 +196,12 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-        <Link to ={ '' }>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Star Wars Collectibles
-          </Typography>
+          <Link component={RouterLink} to={''} className={classes.navlink}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Star Wars Collectibles
+            </Typography>
           </Link>
+
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -206,12 +218,27 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
 
-            <Link to={'productList'}>
-              <Button aria-label="product list" color="inherit">Products</Button>
+
+
+          {/* BUYER: Conditional Links */}
+            <Link component={RouterLink} to={'productList'}  >
+              <Controls.Button 
+                aria-label="product list" 
+                color="primary.light" 
+                text="Products"
+                startIcon={<ListIcon />}
+              >Products</Controls.Button>
             </Link>
-            <Link to = {'orderList'}>
-            <Button aria-label="order history" color="inherit">Orders</Button>
+            <Link component={RouterLink} to={'OrderList'}  >
+              <Controls.Button 
+                aria-label="order history" 
+                color="primary.light" 
+                text="Orders" 
+                startIcon={<HistoryIcon 
+              />}>Orders</Controls.Button>
             </Link>
+
+          {/* Icons with Badges */}
             <IconButton aria-label="show 5 cart items" color="inherit">
               <Badge badgeContent={5} color="secondary">
                 <ShoppingCartIcon />

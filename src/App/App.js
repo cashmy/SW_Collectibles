@@ -10,6 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ProductsDetailView from '../components/ProductsDetailPage/ProductsDetailView';
 import OrderList from '../components/OrderList/OrderList'
 import OrderDetails from '../components/OrderDetails/OrderDetails'
+import addProducts from "../components/AddProducts/addProducts"
 
 class App extends Component {
   state = {}
@@ -43,6 +44,7 @@ class App extends Component {
             <Route exact={true} path="/productList" component={ProductList} />
             <Route exact={true} path="/orderDetails" component={OrderDetails}/>
             <Route exact={true} path="/orderList" component={OrderList} />
+            <Route exact={true} path="/addProducts" component={addProducts}/>
             <SignInSide />
           </Switch>
           <Footer />
