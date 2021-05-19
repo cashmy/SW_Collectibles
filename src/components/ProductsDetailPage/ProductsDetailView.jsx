@@ -46,3 +46,5 @@ function ProductsDetailView() {
 }
 
 export default ProductsDetailView
+
+
