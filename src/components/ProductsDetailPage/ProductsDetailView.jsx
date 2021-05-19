@@ -17,11 +17,9 @@ function ProductsDetailView() {
                 
                 </Grid>
                 <Grid container item xs={4} spacing={3} justify="center" alignItems="center" className="grid" id="midProductDetailGrid">
-                    <div className="product__title">
-                      <h1>Product Title</h1> 
-              
-                 
-                   <p>Product Description</p>
+                    <div >
+                        <h1 className="product__title">Product Title</h1> 
+                        <p className="product__description">Product Description</p>
                     </div>
                 </Grid>
                 <Grid container item xs={4} spacing={3} zeroMinWidth  justify="center" alignItems="center" className="grid">
@@ -34,7 +32,6 @@ function ProductsDetailView() {
                         
                     </div>
                     </Typography>
-                  
                 </Grid>
             </Grid>
         <Grid container direction="row" spacing={5} style={{marginBottom: "2rem"}} id="Reviews">
