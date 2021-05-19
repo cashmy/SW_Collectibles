@@ -25,7 +25,8 @@ class ServiceLayer {
     }
 
     editUser(id, data){
-        return axios.put(`https://localhost:44394/api/user/${id}/edit`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.put(`https://localhost:44394/api/user/${id}/edit`,{headers: {Authorization: 'Bearer ' + jwt}}, data);
     }
 
     setUserRole(id){
