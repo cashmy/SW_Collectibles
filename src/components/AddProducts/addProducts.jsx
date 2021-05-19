@@ -2,6 +2,8 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Controls from '../controls/Controls';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +23,12 @@ export default function FormPropsTextFields() {
        <Grid> <TextField required id="standard-required" label="Product Price" defaultValue="" /></Grid>
        <Grid> <TextField required id="standard-required" label="Product Description" defaultValue="" /></Grid>
        <Grid> <TextField required id="standard-required" label="Quantity"helperText="* means that entry is required" defaultValue="" /></Grid>
+       <Grid>  <Controls.Button 
+                aria-label="product list" 
+                color="primary.light" 
+                text="Add Product Now"
+                startIcon={<AddCircleOutlineIcon />}
+              > Add</Controls.Button></Grid>
        {/* TODO: add upload image field */}
        {/* <Grid> <ImgField required id="standard-required" label="upload image of product" defaultValue="" /></Grid> */}
       </div>
