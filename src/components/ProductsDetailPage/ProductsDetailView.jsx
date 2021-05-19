@@ -62,14 +62,12 @@ function ProductsDetailView() {
                         while(i == 0){
                             return (
                                 <div key={i} className="product__details-right">
-                                    <Typography style={{lineHeight: '3'}} noWrap>
                                         <ul style={{listStyle:"none"}}>
                                             <li>Price: ${product.productPrice}</li>
                                             <li>Rating: {product.productAverageRating} out of 5</li>
                                             <li>Inventory: {product.quantityOnHand} remaining!</li>
                                             <li><Button style={{backgroundColor: '#9C27B0'}} className="addToCart__btn" variant="outlined" >Add To Cart</Button></li>
                                         </ul>
-                                    </Typography>
                                 </div>
                             )
                         }
