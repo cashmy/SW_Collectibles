@@ -75,7 +75,7 @@ export default function SignInSide() {
       password: user.password
     }
     try{
-      const response = await ServiceLayer.userLogin(data);;
+      const response = await ServiceLayer.userLogin(data);
       console.log(response);
       setUser({
         username: data.username,
@@ -84,6 +84,9 @@ export default function SignInSide() {
 
       if(response.data.token !== null){
         window.location.href='/productList';
+      }
+      else{
+        console.log('User token is undefined.')
       }
     } catch(ex){
       console.log('Error in API call', ex);

@@ -1,5 +1,4 @@
 .grid {
-    border: 2px solid red;
     padding: 2rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -8,17 +7,28 @@
 
 .MuiGrid-spacing-xs-3{
     margin: 0;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
-#midProductDetailGrid {
+/* #midProductDetailGrid {
     margin-left: 12px;
     margin-right: 12px;
-}
+} */
 
 .product__img{
-    width: 100%;
-    height: auto;
+    width: 250px;
+}
+
+.product__title{
+    margin-bottom: 3rem;
+    position: relative;
+    bottom: 5rem;
+}
+
+.product__details-right{
+    justify-content: center;
+    text-align: center;
+    line-height: 3;
 }
 
 

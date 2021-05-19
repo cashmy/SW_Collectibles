@@ -40,6 +40,7 @@ class ServiceLayer {
     //Request for Products
 
     getAllProducts(){
+        const jwt = localStorage.getItem('token')
         return axios.get('https://localhost:44394/api/Products');
     }
 
@@ -54,7 +55,7 @@ class ServiceLayer {
     }
 
     getUserReviews(id){
-        return axios.get(`https://localhost:44394/api/ProductReview/${id}/userReviews`);
+        return axios.get(`https://localhost:44394/api/ProductReview/${id}`);
     }
 
     editReview(id, productId, data){
