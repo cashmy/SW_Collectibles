@@ -11,6 +11,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
 import ListIcon from '@material-ui/icons/List';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Controls from '../controls/Controls';
+import Link from '@material-ui/core/Link';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,6 +55,14 @@ export default function BasicTable() {
         subtitle="Complete list of all available products for sale."
         icon={<ListIcon/>}
       />    
+      <Grid> <Link component={RouterLink} to={'addProducts'}  >
+              <Controls.Button 
+                aria-label="product list" 
+                color="primary.light" 
+                text="Add New Products"
+                startIcon={<AddCircleOutlineIcon />}
+              > Add New Products</Controls.Button>
+              </Link></Grid>
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>
