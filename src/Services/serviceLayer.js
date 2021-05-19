@@ -156,7 +156,7 @@ class ServiceLayer {
     }
 
     deleteOrderHeader(id){
-        return axios.delete(`https://localhost:44394/api/OrderHeader/${id}`
+        return axios.delete(`https://localhost:44394/api/OrderHeader/${id}`)
     }
 
 }
