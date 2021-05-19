@@ -1,4 +1,4 @@
-import http from './axios';
+import axios from 'axios';
 
 class ServiceLayer {
 
@@ -8,108 +8,157 @@ class ServiceLayer {
 
     // Request for User
     registerUser(data){
-        return http.post('authentication', data);
+        return axios.post('https://localhost:44394/api/authentication', data);
     }
 
     userLogin(data){
         
-        return http.post('authentication/login', data);
+        return axios.post('https://localhost:44394/api/authentication/login', data);
     }
 
-    
-
     getAllUsers(){
-        return http.get('user/allUsers');
+        return axios.get('https://localhost:44394/api/user/allUsers');
     }
 
     getUser(id){
-        return http.get(`user/${id}/get`);
+        return axios.get(`https://localhost:44394/api/user/${id}/get`);
+    }
+
+    editUser(id, data){
+        return axios.put(`https://localhost:44394/api/user/${id}/edit`, data);
     }
 
     setUserRole(id){
-        return http.post(`user/${id}/setRole`);
+        return axios.post(`https://localhost:44394/api/user/${id}/setRole`);
     }
 
     deleteUser(id){
-        return http.delete(`user/${id}/delete`);
+        return axios.delete(`https://localhost:44394/api/user/${id}/delete`);
     }
 
     //Request for Products
 
     getAllProducts(){
-        return http.get('Products');
+        return axios.get('https://localhost:44394/api/Products');
     }
 
     addProduct(data){
-        return http.post(`Products`, data);
+        return axios.post(`https://localhost:44394/api/Products`, data);
     }
 
     //Request for Products Review
 
     getAllReviews(){
-        return http.get('ProductReview');
+        return axios.get('https://localhost:44394/api/ProductReview');
     }
 
     getUserReviews(id){
-        return http.get(`ProductReview/${id}/userReviews`);
+        return axios.get(`https://localhost:44394/api/ProductReview/${id}/userReviews`);
     }
 
     editReview(id, productId, data){
-        return http.put(`ProductReview/${id}/${productId}/review`, data);
+        return axios.put(`https://localhost:44394/api/ProductReview/${id}/${productId}/review`, data);
     }
 
     createReview(data){
-        return http.post('ProductReview/create', data);
+        return axios.post('https://localhost:44394/api/ProductReview/create', data);
     }
 
     deleteReview(id, productId){
-        return http.delete(`ProductReview/${id}/${productId}/deleteReview`);
+        return axios.delete(`https://localhost:44394/api/ProductReview/${id}/${productId}/deleteReview`);
     }
 
     //Request for Category
 
     getCategories(){
-        return http.get('Category');
+        return axios.get('https://localhost:44394/api/Category');
     }
 
     createCategory(data){
-        return http.post(`Category`, data);
+        return axios.post(`https://localhost:44394/api/Category`, data);
     }
 
     deleteCategory(id){
-        return http.delete(`Category/${id}`)
+        return axios.delete(`https://localhost:44394/api/Category/${id}`)
     }
 
     //Request for ShoppingCart
     
     getUserCart(id){
-        return http.get(`ShoppingCart/${id}/cart`);
+        return axios.get(`https://localhost:44394/api/ShoppingCart/${id}/cart`);
     }
 
     addToCart(id, data){
-        return http.post(`ShoppingCart/${id}/postCart`)
+        return axios.post(`https://localhost:44394/api/ShoppingCart/${id}/postCart`, data)
     }
 
     editCart(id, productId, data){
-        return http.put(`ShoppingCart/${id}/${productId}/edit`, data);
+        return axios.put(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/edit`, data);
     }
 
     deleteCart(id, productId){
-        return http.delete(`ShoppingCart/${id}/${productId}/delete`);
+        return axios.delete(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/delete`);
     }
 
     //Request for SupplierProducts
     getSupplierProducts(){
-        return http.get('SupplierProducts');
+        return axios.get('https://localhost:44394/api/SupplierProducts');
     }
 
     createSupplierProducts(id, productId, data){
-        return http.post(`SupplierProducts/${id}/${productId}`, data);
+        return axios.post(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`, data);
     }
 
     deleteSupplierProducts(id, productId){
-        return http.delete(`SupplierProducts/${id}/${productId}`);
+        return axios.delete(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`);
     }
+
+    //Request for Order Details
+    getOrderDetails(){
+        return axios.get('https://localhost:44394/api/OrderDetails')
+    }
+
+    getOrderDetailById(id){
+        return axios.get(`https://localhost:44394/api/OrderDetails/${id}`)
+    }
+
+    getOrderDetailByProduct(productId){
+        return axios.get(`https://localhost:44394/api/OrderDetails/${productId}`)
+    }
+
+    addProduct(data){
+        return axios.post(`https://localhost:44394/api/OrderDetails`, data)
+    }
+
+    editOrderDetail(id, data){
+        return axios.put(`https://localhost:44394/api/OrderDetails/${id}`, data)
+    }
+
+    deleteOrderDetail(id){
+        return axios.delete(`https://localhost:44394/api/OrderDetails/${id}`)
+    }
+
+    //Request for Order Header
+    getOrderHeader(){
+        return axios.get(`https://localhost:44394/api/OrderHeader`)
+    }
+
+    getOrderHeaderById(id){
+        return axios.get(`https://localhost:44394/api/OrderHeader/${id}`)
+    }
+
+    addOrderHeader(data){
+        return axios.post(`https://localhost:44394/api/OrderHeader`, data)
+    }
+
+    editOrderHeader(id, data){
+        return axios.put(`https://localhost:44394/api/OrderHeader/${id}`, data)
+    }
+
+    deleteOrderHeader(id){
+        return axios.delete(`https://localhost:44394/api/OrderHeader/${id}`
+    }
+
 }
 
 export default new ServiceLayer();
