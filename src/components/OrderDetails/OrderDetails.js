@@ -99,10 +99,10 @@ function OrderDetails(){
                     <TableBody>
                     {details.map((orderDetails, i) => (
                         <TableRow key={i}>
-                        <TableCell align="right">  {orderDetails.ProductId} </TableCell>
-                        <TableCell align="right">{orderDetails.ProductPrice}</TableCell>
-                        <TableCell align="right">{orderDetails.Quantity} </TableCell>
-                        <TableCell align="right">{orderDetails.ExtPrice}</TableCell>
+                        <TableCell align="right"><Paper><center>{orderDetails.ProductId}</center></Paper> </TableCell>
+                        <TableCell align="right"><Paper><center>{orderDetails.ProductPrice}</center></Paper></TableCell>
+                        <TableCell align="right"><Paper><center>{orderDetails.Quantity}</center></Paper> </TableCell>
+                        <TableCell align="right"><Paper><center>{orderDetails.ExtPrice}</center></Paper></TableCell>
 
                         </TableRow>
                     ))}
