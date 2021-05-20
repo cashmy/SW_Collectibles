@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-//product['countInStock']   line 75  you would replate the number 5 with the products quantity that exist being sold on the website from the seller.
+//product['countInStock']   line 75  you would replate the number 5 with the products quantity that exist being sold on the website from the seller.gi
 
 export default function BasicTable() {
   const classes = useStyles();
