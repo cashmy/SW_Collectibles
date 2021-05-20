@@ -11,7 +11,21 @@ import ProductsDetailView from '../components/ProductsDetailPage/ProductsDetailV
 import OrderList from '../components/OrderList/OrderList'
 import OrderDetails from '../components/OrderDetails/OrderDetails'
 import addProducts from "../components/AddProducts/addProducts"
+import RegistrationSide from "../components/RegistrationSide/RegistrationSide"
 import shoppingCart from "../components/ShoppingCart/shoppingCart"
+import Paper from '@material-ui/core/Paper';
+import BackgroundImage from '../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
+
+const styles = {
+  paperContainer: {
+    backgroundImage: `url(${BackgroundImage})`, 
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    height: "100vh"
+  }
+};
 
 class App extends Component {
   state = {}
@@ -27,7 +41,7 @@ class App extends Component {
   render() {
     const user = this.state.user;
     return (
-      <div >
+      <Paper style={styles.paperContainer} >
           <CssBaseline />
           <AppBar user={user} />
           <Switch>
@@ -40,7 +54,7 @@ class App extends Component {
               }}
             />
         
-       
+            <Route exact={true} path="/registration" component={RegistrationSide}/> 
             <Route exact={true} path="/productDetails" component={ProductsDetailView} />
             <Route exact={true} path="/productList" component={ProductList} />
             <Route exact={true} path="/orderDetails" component={OrderDetails}/>
@@ -50,7 +64,7 @@ class App extends Component {
             <SignInSide />
           </Switch>
           <Footer />
-      </div>
+      </Paper>
     );
   }
 }

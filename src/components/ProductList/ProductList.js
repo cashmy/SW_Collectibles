@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
 import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,6 +14,8 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
+import ServiceLayer from '../../Services/serviceLayer'
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,19 +34,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein, actions) {
-  return { name, calories, fat, carbs, protein, actions };
+function ListProducts() {
+  const [products, setProducts] = useState([])
+
+const handleSubmit = (product, i) => {
+  debugger;
+   let cart = []
+   if (i ==0){
+  cart.push(product);
+   }
+  console.log(cart);
+   return cart;
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
-export default function BasicTable() {
+useEffect(() => {
+  getProducts();
+},[])
+
+async function getProducts(e){
+  try{
+      const response = await ServiceLayer.getAllProducts();
+      setProducts(response.data);
+  }
+  catch(e){
+      console.log('API call unsuccessful', e)
+  }
+}
+
+if (products){
+  console.log(products)
+}
+
   const classes = useStyles();
 
   return (
@@ -77,15 +97,14 @@ export default function BasicTable() {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
-                        <TableCell component="th" scope="row">
-                            {row.name}
+                    {products.map((product, i) => (
+                        <TableRow key={i}>
+                        <TableCell align="right">{product.productDescription}</TableCell>
+                        <TableCell align="right">{product.productImage}</TableCell>
+                        <TableCell align="right">{product.productPrice}</TableCell>
+                        <TableCell align="right">{product.productAverageRating}</TableCell>
+                        <TableCell align="right"><Button style={{backgroundColor: '#9C27B0'}} className="addToCart__btn" variant="outlined" onClick= {handleSubmit(product, i)} >Add To Cart</Button>
                         </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.actions}</TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
@@ -97,3 +116,4 @@ export default function BasicTable() {
   );
 }
 
+export default ListProducts

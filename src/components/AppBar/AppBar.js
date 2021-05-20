@@ -90,9 +90,6 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     listStyle: 'none',
     position: 'relative',
-    '& current': {
-      borderBottom: '1px solid black'
-    }
   }
 }));
 
@@ -133,7 +130,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Log Off</MenuItem>
     </Menu>
   );
 
@@ -149,10 +146,30 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="product list" color="inherit">
-          <ListIcon />
-        </IconButton>
-        <p>Products</p>
+        <Link component={RouterLink} to={'productList'}  >
+          <IconButton aria-label="product list" color="inherit">
+            <ListIcon />
+          </IconButton>
+          Products
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link component={RouterLink} to={'OrderList'}  >
+          <IconButton aria-label="order list" color="inherit">
+            <HistoryIcon />
+          </IconButton>
+          Orders
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link component={RouterLink} to={'shoppingCart'}>
+          <IconButton aria-label="show 5 cart items" color="inherit">
+            <Badge badgeContent={5} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+          Shopping Cart
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
@@ -239,16 +256,14 @@ export default function PrimarySearchAppBar() {
             </Link>
 
           {/* Icons with Badges */}
-              <Link component={RouterLink} to={'shoppingCart'}>
-            <IconButton aria-label="show 5 cart items" color="inherit">
-            
-              <Badge badgeContent={5} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+            <Link component={RouterLink} to={'shoppingCart'} className={classes.navlink}>
+              <IconButton aria-label="show 5 cart items" color="inherit">
+                <Badge badgeContent={5} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
             </Link>
             
-
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />

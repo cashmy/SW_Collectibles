@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,7 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
+
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -75,7 +76,7 @@ export default function SignInSide() {
       password: user.password
     }
     try{
-      const response = await ServiceLayer.userLogin(data);;
+      const response = await ServiceLayer.userLogin(data);
       console.log(response);
       setUser({
         username: data.username,
@@ -84,6 +85,9 @@ export default function SignInSide() {
 
       if(response.data.token !== null){
         window.location.href='/productList';
+      }
+      else{
+        console.log('User token is undefined.')
       }
     } catch(ex){
       console.log('Error in API call', ex);
@@ -165,14 +169,14 @@ export default function SignInSide() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link component={RouterLink} to={'registration'} variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
+            {/* <Box mt={5}>
               <Copyright />
-            </Box>
+            </Box> */}
           </form>
         </div>
       </Grid>
