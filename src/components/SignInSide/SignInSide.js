@@ -15,7 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from '../../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
 import axios from 'axios';
-
+import { Redirect } from 'react-router';
+import ServiceLayer from '../../Services/serviceLayer.js';
 
 function Copyright() {
   return (
@@ -70,13 +71,12 @@ export default function SignInSide() {
 
   async function handleSubmit(event){
     event.preventDefault();
-    debugger;
     const data = {
       username: user.username,
       password: user.password
     }
     try{
-      const response = await axios.post("https://localhost:44394/api/authentication/login", data);
+      const response = await ServiceLayer.userLogin(data);
       console.log(response);
       setUser({
         username: data.username,
@@ -86,8 +86,12 @@ export default function SignInSide() {
       if(response.data.token !== null){
         window.location.href='/productList';
       }
+      else{
+        console.log('User token is undefined.')
+      }
     } catch(ex){
       console.log('Error in API call', ex);
+      alert("Incorrect Username or Password. Try again.")
     }
 
     

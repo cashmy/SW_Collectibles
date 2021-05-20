@@ -43,12 +43,12 @@ function OrderDetails(){
         icon={<HistoryIcon/>}
       /> 
           
-        <div><center style={{marginTop: "2rem"}}>Order Number</center></div>
+        <div><center style={{marginTop: "2rem"}}>Order Number: Date Purchased</center></div>
 
                
         <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
-          <Grid item xs={3} style={{marginBottom: "2rem"}}>
+          <Grid item xs={2} style={{marginBottom: "2rem"}}>
             Address Line 1 & address line 2
           </Grid>
           <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
@@ -64,6 +64,7 @@ function OrderDetails(){
             Country
           </Grid>
 
+
             <TableContainer>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
@@ -72,6 +73,7 @@ function OrderDetails(){
                         <TableCell align="right">Product Price</TableCell>
                         <TableCell align="right">Quantity Ordered</TableCell>
                         <TableCell align="right">Total Price</TableCell>
+                     
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -81,6 +83,7 @@ function OrderDetails(){
                         <TableCell align="right">Product.Price</TableCell>
                         <TableCell align="right">Product.Quantity </TableCell>
                         <TableCell align="right">Product.TotalPrice</TableCell>
+
                         </TableRow>
                        </TableBody>
                 </Table>
