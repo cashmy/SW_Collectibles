@@ -38,7 +38,6 @@ function ListProducts() {
   const [products, setProducts] = useState([])
 
 const handleSubmit = (product, i) => {
-  debugger;
    let cart = []
    if (i ==0){
   cart.push(product);
@@ -103,7 +102,15 @@ if (products){
                         <TableCell align="right">{product.productImage}</TableCell>
                         <TableCell align="right">{product.productPrice}</TableCell>
                         <TableCell align="right">{product.productAverageRating}</TableCell>
-                        <TableCell align="right"><Button style={{backgroundColor: '#9C27B0'}} className="addToCart__btn" variant="outlined" onClick= {handleSubmit(product, i)} >Add To Cart</Button>
+                        <TableCell align="right"><Button style={{backgroundColor: '#9C27B0'}} className="addToCart__btn" variant="outlined" onClick= {() => handleSubmit(product, i,)} >Add To Cart</Button>
+                        <Grid> <Link component={RouterLink} to={'productDetails'} product = {product} >
+                        <Controls.Button 
+                          aria-label="product list" 
+                          color="primary.light" 
+                          text="View Product Details"
+                          startIcon={<AddCircleOutlineIcon />}
+                        > A</Controls.Button>
+                        </Link></Grid>
                         </TableCell>
                         </TableRow>
                     ))}

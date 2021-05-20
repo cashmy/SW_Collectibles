@@ -7,14 +7,16 @@ import ServiceLayer from '../../Services/serviceLayer';
 import { Button } from '@material-ui/core';
 
 
-function ProductsDetailView() {
+function ProductsDetailView(props) {
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([])
+    const [item, setItem] = useState(props.product)
 
     useEffect(() => {
         getProducts();
         getReviews();
-    }, [])
+        console.log(item)
+    }, [props])
 
     async function getProducts(e){
         try{
