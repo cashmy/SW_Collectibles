@@ -89,9 +89,9 @@ if (products){
                     <TableHead>
                     <TableRow>
                         <TableCell>Name</TableCell>
-                        <TableCell align="right">Image</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="right">Rating</TableCell>
+                        <TableCell align="right">Quantity</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
                     </TableHead>
@@ -99,9 +99,9 @@ if (products){
                     {products.map((product, i) => (
                         <TableRow key={i}>
                         <TableCell align="right">{product.productDescription}</TableCell>
-                        <TableCell align="right">{product.productImage}</TableCell>
                         <TableCell align="right">{product.productPrice}</TableCell>
                         <TableCell align="right">{product.productAverageRating}</TableCell>
+                        <TableCell align="right">{product.quantityOnHand}</TableCell>
                         <TableCell align="right"><Button style={{backgroundColor: '#9C27B0'}} className="addToCart__btn" variant="outlined" onClick= {() => handleSubmit(product, i,)} >Add To Cart</Button>
                         <Grid> <Link component={RouterLink} to={'productDetails'} product = {product} >
                         <Controls.Button 
@@ -109,7 +109,7 @@ if (products){
                           color="primary.light" 
                           text="View Product Details"
                           startIcon={<AddCircleOutlineIcon />}
-                        > A</Controls.Button>
+                        > </Controls.Button>
                         </Link></Grid>
                         </TableCell>
                         </TableRow>
