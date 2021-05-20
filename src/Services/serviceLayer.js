@@ -117,7 +117,7 @@ class ServiceLayer {
 
     //Request for Order Details
     getOrderDetails(){
-        return axios.get('https://localhost:44394/api/OrderDetails')
+        return axios.get('https://localhost:44394/api/orderDetail')
     }
 
     getOrderDetailById(id){
