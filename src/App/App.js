@@ -55,7 +55,7 @@ class App extends Component {
             />
         
             <Route exact={true} path="/registration" component={RegistrationSide}/> 
-            <Route exact={true} path="/productDetails" component={ProductsDetailView} />
+            <Route path="/productDetails" component={ProductsDetailView} />
             <Route exact={true} path="/productList" component={ProductList} />
             <Route exact={true} path="/orderDetails" component={OrderDetails}/>
             <Route exact={true} path="/orderList" component={OrderList} />
