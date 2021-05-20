@@ -94,7 +94,7 @@ function OrderDetails(){
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                
+                    {details.map((orderDetails, i) => (
                         <TableRow>
                         <TableCell align="right">  {orderDetails.Product} </TableCell>
                         <TableCell align="right">{orderDetails.ProductPrice}</TableCell>
@@ -102,7 +102,7 @@ function OrderDetails(){
                         <TableCell align="right">{orderDetails.ExtPrice}</TableCell>
 
                         </TableRow>
-          
+                    ))}
                        </TableBody>
                 </Table>
             </TableContainer>
