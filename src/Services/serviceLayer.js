@@ -26,7 +26,7 @@ class ServiceLayer {
 
     editUser(id, data){
         const jwt = localStorage.getItem('token')
-        return axios.put(`https://localhost:44394/api/user/${id}/edit`,{headers: {Authorization: 'Bearer ' + jwt}}, data);
+        return axios.put(`https://localhost:44394/api/user/${id}/edit`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     setUserRole(id){
@@ -53,7 +53,7 @@ class ServiceLayer {
 
     addProduct(data){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/Products`,{headers: {Authorization: 'Bearer ' + jwt}},  data);
+        return axios.post(`https://localhost:44394/api/Products`, data , {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     //Request for Products Review
@@ -75,12 +75,12 @@ class ServiceLayer {
 
     editReview(id, productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.put(`https://localhost:44394/api/ProductReview/${id}/${productId}/review`, {headers: {Authorization: 'Bearer ' + jwt}},  data);
+        return axios.put(`https://localhost:44394/api/ProductReview/${id}/${productId}/review`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     createReview(data){
         const jwt = localStorage.getItem('token')
-        return axios.post('https://localhost:44394/api/ProductReview/create', {headers: {Authorization: 'Bearer ' + jwt}}, data);
+        return axios.post('https://localhost:44394/api/ProductReview/create', data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     deleteReview(id, productId){
@@ -97,7 +97,7 @@ class ServiceLayer {
 
     createCategory(data){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/Category`, {headers: {Authorization: 'Bearer ' + jwt}},  data);
+        return axios.post(`https://localhost:44394/api/Category`,  data,  {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     deleteCategory(id){
@@ -114,12 +114,12 @@ class ServiceLayer {
 
     addToCart(id, data){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/ShoppingCart/${id}/postCart`, {headers: {Authorization: 'Bearer ' + jwt}}, data)
+        return axios.post(`https://localhost:44394/api/ShoppingCart/${id}/postCart`, data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     editCart(id, productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.put(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/edit`, {headers: {Authorization: 'Bearer ' + jwt}},  data);
+        return axios.put(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/edit`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     deleteCart(id, productId){
@@ -134,7 +134,7 @@ class ServiceLayer {
 
     createSupplierProducts(id, productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}}, data);
+        return axios.post(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     deleteSupplierProducts(id, productId){
@@ -160,12 +160,12 @@ class ServiceLayer {
 
     addProduct(data){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/OrderDetail`, {headers: {Authorization: 'Bearer ' + jwt}}, data);
+        return axios.post(`https://localhost:44394/api/OrderDetail`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     editOrderDetail(id, data){
         const jwt = localStorage.getItem('token')
-        return axios.put(`https://localhost:44394/api/OrderDetail/${id}`, {headers: {Authorization: 'Bearer ' + jwt}}, data);
+        return axios.put(`https://localhost:44394/api/OrderDetail/${id}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     deleteOrderDetail(id){
@@ -186,12 +186,12 @@ class ServiceLayer {
 
     addOrderHeader(data){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/OrderHeader`, {headers: {Authorization: 'Bearer ' + jwt}}, data)
+        return axios.post(`https://localhost:44394/api/OrderHeader`, data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     editOrderHeader(id, data){
         const jwt = localStorage.getItem('token')
-        return axios.put(`https://localhost:44394/api/OrderHeader/${id}`, {headers: {Authorization: 'Bearer ' + jwt}}, data)
+        return axios.put(`https://localhost:44394/api/OrderHeader/${id}`, data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     deleteOrderHeader(id){

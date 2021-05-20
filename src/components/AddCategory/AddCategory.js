@@ -7,6 +7,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import { LocalConvenienceStoreOutlined, SettingsInputSvideoRounded } from '@material-ui/icons';
+import serviceLayer from '../../Services/serviceLayer';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -30,7 +31,7 @@ export default function FormPropsTextFields() {
     categoryDescription: category.categoryDescription
   }
   try{
-    const response = await axios.post(`https://localhost:44394/api/Category`, data);
+    const response = await serviceLayer.createCategory(data);
     console.log(response);
     setCategory({
       categoryDescription: data.categoryDescription,

@@ -7,6 +7,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import { LocalConvenienceStoreOutlined, SettingsInputSvideoRounded } from '@material-ui/icons';
+import serviceLayer from '../../Services/serviceLayer';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -29,6 +30,7 @@ export default function FormPropsTextFields() {
 
   async function handleSubmit(event){
     event.preventDefault();
+    debugger;
     const data = {
     productDescription: product.productDescription,
     productPrice:product.productPrice,
@@ -36,16 +38,17 @@ export default function FormPropsTextFields() {
     categoryId: product.categoryId,
     productAverageRating: product.productAverageRating
   }
+  
   try{
-    const response = await axios.post(`https://localhost:44394/api/Products`, data);
-    console.log(response);
+    const jwt = localStorage.getItem('token')
+    const response = await axios.post(`https://localhost:44394/api/Products`, data , {headers: {Authorization: 'Bearer ' + jwt}});
+    console.log(response); 
     setProduct({
       productDescription: data.productDescription,
       productPrice: data.productPrice,
       quantityOnHand: data.quantityOnHand,
       categoryId:data.categoryId,
       productAverageRating: data.productAverageRating
-
     });
   }catch(ex){
     console.log('Error in API call', ex.response.data);
