@@ -54,7 +54,6 @@ const viewProduct = (product) => {
   history.push(`productDetails/${product}`);
 }
 
-
 useEffect(() => {
   getProducts();
 },[])
