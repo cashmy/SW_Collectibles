@@ -44,6 +44,10 @@ class ServiceLayer {
         return axios.get('https://localhost:44394/api/Products');
     }
 
+    getProductById(id){
+        return axios.get(`https://localhost:44394/api/Products/${id}`)
+    }
+
     addProduct(data){
         return axios.post(`https://localhost:44394/api/Products`, data);
     }
@@ -54,8 +58,12 @@ class ServiceLayer {
         return axios.get('https://localhost:44394/api/ProductReview');
     }
 
-    getUserReviews(id){
-        return axios.get(`https://localhost:44394/api/ProductReview/${id}`);
+    getUserReviews(userId){
+        return axios.get(`https://localhost:44394/api/ProductReview/${userId}`);
+    }
+
+    getReviewByProductId(productId){
+        return axios.get(`https://localhost:44394/api/ProductReview/${productId}`)
     }
 
     editReview(id, productId, data){

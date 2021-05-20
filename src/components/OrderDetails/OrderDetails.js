@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
@@ -66,8 +66,6 @@ function OrderDetails(){
       /> 
           
         <div><center style={{marginTop: "2rem"}}>Order Number: Date Purchased</center></div>
-
-               
         <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
           <Grid item xs={2} style={{marginBottom: "2rem"}}>
