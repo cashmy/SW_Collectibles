@@ -11,6 +11,7 @@ import ProductsDetailView from '../components/ProductsDetailPage/ProductsDetailV
 import OrderList from '../components/OrderList/OrderList'
 import OrderDetails from '../components/OrderDetails/OrderDetails'
 import addProducts from "../components/AddProducts/addProducts"
+import RegistrationSide from "../components/RegistrationSide/RegistrationSide"
 
 class App extends Component {
   state = {}
@@ -39,7 +40,7 @@ class App extends Component {
               }}
             />
         
-       
+            <Route exact={true} path="/registration" component={RegistrationSide}/> 
             <Route exact={true} path="/productDetails" component={ProductsDetailView} />
             <Route exact={true} path="/productList" component={ProductList} />
             <Route exact={true} path="/orderDetails" component={OrderDetails}/>
