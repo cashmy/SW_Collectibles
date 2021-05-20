@@ -81,7 +81,16 @@ if (products){
                 text="Add New Products"
                 startIcon={<AddCircleOutlineIcon />}
               > Add New Products</Controls.Button>
-              </Link></Grid>
+              </Link>
+              <Link component={RouterLink} to={'addCategory'}  >
+              <Controls.Button 
+                aria-label="product list" 
+                color="primary.light" 
+                text="Add A Category"
+                startIcon={<AddCircleOutlineIcon />}
+              > Add New Products</Controls.Button>
+              </Link>
+              </Grid>
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>

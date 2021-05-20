@@ -29,7 +29,6 @@ export default function FormPropsTextFields() {
 
   async function handleSubmit(event){
     event.preventDefault();
-    debugger;
     const data = {
     productDescription: product.productDescription,
     productPrice:product.productPrice,
