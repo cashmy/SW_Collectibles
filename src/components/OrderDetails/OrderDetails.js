@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
 import HistoryIcon from '@material-ui/icons/History';
+import ServiceLayer from '../../Services/serviceLayer';
 
 function OrderDetails(){
 
@@ -31,6 +32,22 @@ function OrderDetails(){
         minWidth: 650,
       },
     }));
+
+    const [details, setOrderDetails] = useState([]);
+
+    useEffect(() => {
+        getDetails();
+      },[])
+
+    async function getDetails(e){
+        try{
+            const response = await ServiceLayer.getOrderDetails();
+            setOrderDetails(response.data);
+        }
+        catch(e){
+            console.log('API call unsuccessful', e)
+        }
+    }
 
 
     const classes = useStyles();
@@ -77,14 +94,15 @@ function OrderDetails(){
                     </TableRow>
                     </TableHead>
                     <TableBody>
-        
+                
                         <TableRow>
-                        <TableCell align="right">  Product.Name </TableCell>
-                        <TableCell align="right">Product.Price</TableCell>
-                        <TableCell align="right">Product.Quantity </TableCell>
-                        <TableCell align="right">Product.TotalPrice</TableCell>
+                        <TableCell align="right">  {orderDetails.Product} </TableCell>
+                        <TableCell align="right">{orderDetails.ProductPrice}</TableCell>
+                        <TableCell align="right">{orderDetails.Quantity} </TableCell>
+                        <TableCell align="right">{orderDetails.ExtPrice}</TableCell>
 
                         </TableRow>
+          
                        </TableBody>
                 </Table>
             </TableContainer>
