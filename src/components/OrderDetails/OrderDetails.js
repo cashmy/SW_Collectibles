@@ -40,12 +40,13 @@ function OrderDetails(){
       },[])
 
     async function getDetails(e){
+      debugger;
         try{
             const response = await ServiceLayer.getOrderDetails();
             setOrderDetails(response.data);
         }
         catch(e){
-            console.log('API call unsuccessful', e)
+            console.log('API call unsuccessful', e.response.data)
         }
     }
 
