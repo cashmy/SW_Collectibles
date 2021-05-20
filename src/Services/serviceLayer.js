@@ -30,84 +30,101 @@ class ServiceLayer {
     }
 
     setUserRole(id){
+        const jwt = localStorage.getItem('token')
         return axios.post(`https://localhost:44394/api/user/${id}/setRole`);
     }
 
     deleteUser(id){
-        return axios.delete(`https://localhost:44394/api/user/${id}/delete`);
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/user/${id}/delete`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     //Request for Products
 
     getAllProducts(){
         const jwt = localStorage.getItem('token')
-        return axios.get('https://localhost:44394/api/Products');
+        return axios.get('https://localhost:44394/api/Products', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     getProductById(id){
-        return axios.get(`https://localhost:44394/api/Products/${id}`)
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/Products/${id}`, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     addProduct(data){
-        return axios.post(`https://localhost:44394/api/Products`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/Products`,{headers: {Authorization: 'Bearer ' + jwt}},  data);
     }
 
     //Request for Products Review
 
     getAllReviews(){
-        return axios.get('https://localhost:44394/api/ProductReview');
+        const jwt = localStorage.getItem('token')
+        return axios.get('https://localhost:44394/api/ProductReview',{headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     getUserReviews(userId){
-        return axios.get(`https://localhost:44394/api/ProductReview/${userId}`);
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/ProductReview/${userId}`, {headers: {Authorization: 'Bearer ' + jwt}} );
     }
 
     getReviewByProductId(productId){
-        return axios.get(`https://localhost:44394/api/ProductReview/${productId}`)
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/ProductReview/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     editReview(id, productId, data){
-        return axios.put(`https://localhost:44394/api/ProductReview/${id}/${productId}/review`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.put(`https://localhost:44394/api/ProductReview/${id}/${productId}/review`, {headers: {Authorization: 'Bearer ' + jwt}},  data);
     }
 
     createReview(data){
-        return axios.post('https://localhost:44394/api/ProductReview/create', data);
+        const jwt = localStorage.getItem('token')
+        return axios.post('https://localhost:44394/api/ProductReview/create', {headers: {Authorization: 'Bearer ' + jwt}}, data);
     }
 
     deleteReview(id, productId){
-        return axios.delete(`https://localhost:44394/api/ProductReview/${id}/${productId}/deleteReview`);
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/ProductReview/${id}/${productId}/deleteReview`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     //Request for Category
 
     getCategories(){
-        return axios.get('https://localhost:44394/api/Category');
+        const jwt = localStorage.getItem('token')
+        return axios.get('https://localhost:44394/api/Category', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     createCategory(data){
-        return axios.post(`https://localhost:44394/api/Category`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/Category`, {headers: {Authorization: 'Bearer ' + jwt}},  data);
     }
 
     deleteCategory(id){
-        return axios.delete(`https://localhost:44394/api/Category/${id}`)
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/Category/${id}`, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     //Request for ShoppingCart
     
     getUserCart(id){
-        return axios.get(`https://localhost:44394/api/ShoppingCart/${id}/cart`);
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/ShoppingCart/${id}/cart`,{headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     addToCart(id, data){
-        return axios.post(`https://localhost:44394/api/ShoppingCart/${id}/postCart`, data)
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/ShoppingCart/${id}/postCart`, {headers: {Authorization: 'Bearer ' + jwt}}, data)
     }
 
     editCart(id, productId, data){
-        return axios.put(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/edit`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.put(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/edit`, {headers: {Authorization: 'Bearer ' + jwt}},  data);
     }
 
     deleteCart(id, productId){
-        return axios.delete(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/delete`);
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/delete`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     //Request for SupplierProducts
@@ -116,57 +133,70 @@ class ServiceLayer {
     }
 
     createSupplierProducts(id, productId, data){
-        return axios.post(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}}, data);
     }
 
     deleteSupplierProducts(id, productId){
-        return axios.delete(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`);
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/SupplierProducts/${id}/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     //Request for Order Details
     getOrderDetails(){
-        return axios.get('https://localhost:44394/api/OrderDetail');
+        const jwt = localStorage.getItem('token')
+        return axios.get('https://localhost:44394/api/OrderDetail', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     getOrderDetailById(id){
-        return axios.get(`https://localhost:44394/api/OrderDetail/${id}`);
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/OrderDetail/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     getOrderDetailByProduct(productId){
-        return axios.get(`https://localhost:44394/api/OrderDetail/${productId}`);
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/OrderDetail/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     addProduct(data){
-        return axios.post(`https://localhost:44394/api/OrderDetail`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/OrderDetail`, {headers: {Authorization: 'Bearer ' + jwt}}, data);
     }
 
     editOrderDetail(id, data){
-        return axios.put(`https://localhost:44394/api/OrderDetail/${id}`, data);
+        const jwt = localStorage.getItem('token')
+        return axios.put(`https://localhost:44394/api/OrderDetail/${id}`, {headers: {Authorization: 'Bearer ' + jwt}}, data);
     }
 
     deleteOrderDetail(id){
-        return axios.delete(`https://localhost:44394/api/OrderDetail/${id}`);
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/OrderDetail/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     //Request for Order Header
     getOrderHeader(){
-        return axios.get(`https://localhost:44394/api/OrderHeader`)
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/OrderHeader`, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     getOrderHeaderById(id){
-        return axios.get(`https://localhost:44394/api/OrderHeader/${id}`)
+        const jwt = localStorage.getItem('token')
+        return axios.get(`https://localhost:44394/api/OrderHeader/${id}`, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     addOrderHeader(data){
-        return axios.post(`https://localhost:44394/api/OrderHeader`, data)
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/OrderHeader`, {headers: {Authorization: 'Bearer ' + jwt}}, data)
     }
 
     editOrderHeader(id, data){
-        return axios.put(`https://localhost:44394/api/OrderHeader/${id}`, data)
+        const jwt = localStorage.getItem('token')
+        return axios.put(`https://localhost:44394/api/OrderHeader/${id}`, {headers: {Authorization: 'Bearer ' + jwt}}, data)
     }
 
     deleteOrderHeader(id){
-        return axios.delete(`https://localhost:44394/api/OrderHeader/${id}`)
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/OrderHeader/${id}`, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
 }

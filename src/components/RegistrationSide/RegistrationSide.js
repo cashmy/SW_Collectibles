@@ -100,7 +100,7 @@ export default function SignInSide() {
       });
 
       if(response.data.token !== null){
-        window.location.href='/productList';
+        window.location.href='/login';
       }
     } catch(ex){
       console.log('Error in API call', ex.response.data);
