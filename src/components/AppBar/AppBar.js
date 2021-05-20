@@ -264,7 +264,7 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             </Link>
             
-            <Link component={RouterLink} to={'checkOut'} className={classes.navlink}>
+            <Link component={RouterLink} to={'address'} className={classes.navlink}>
               <IconButton aria-label="show 5 cart items" color="inherit">
 
                   <CheckCircleOutlineIcon />

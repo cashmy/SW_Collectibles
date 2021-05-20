@@ -13,6 +13,9 @@ import OrderDetails from '../components/OrderDetails/OrderDetails'
 import addProducts from "../components/AddProducts/addProducts"
 import RegistrationSide from "../components/RegistrationSide/RegistrationSide"
 import AddressForm from "../components/CheckOut/AddressForm"
+import PaymentForm from "../components/CheckOut/PaymentForm"
+import Review from "../components/CheckOut/Review"
+import CheckOut from "../components/CheckOut/CheckOut"
 import shoppingCart from "../components/ShoppingCart/shoppingCart"
 import Paper from '@material-ui/core/Paper';
 import BackgroundImage from '../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
@@ -54,7 +57,10 @@ class App extends Component {
                 }
               }}
             />
-            <Route path="/checkOut" component={AddressForm} />
+            <Route path="/address" component={AddressForm} />
+            <Route path="/payment" component={PaymentForm} />
+            <Route path="/review" component={Review} />
+            <Route path="/checkOut" component={CheckOut} />
             <Route exact={true} path="/registration" component={RegistrationSide}/> 
             <Route path="/productDetails" component={ProductsDetailView} />
             <Route exact={true} path="/productList" component={ProductList} />

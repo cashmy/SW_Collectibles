@@ -47,7 +47,6 @@ const handleSubmit = (product, i) => {
    return cart;
 }
 
-
 useEffect(() => {
   getProducts();
 },[])
