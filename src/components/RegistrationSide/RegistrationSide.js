@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Image from '../../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import serviceLayer from '../../Services/serviceLayer';
 
 function Copyright() {
   return (
@@ -74,7 +75,6 @@ export default function SignInSide() {
 
   async function handleSubmit(event){
     event.preventDefault();
-    debugger;
     const data = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -86,7 +86,7 @@ export default function SignInSide() {
       isSupplier: user.isSupplier,
     }
     try{
-      const response = await axios.post("https://localhost:44394/api/authentication/register", data);
+      const response = await serviceLayer.registerUser(data);
       console.log(response);
       setUser({
         firstName: data.firstName,
@@ -103,7 +103,7 @@ export default function SignInSide() {
         window.location.href='/productList';
       }
     } catch(ex){
-      console.log('Error in API call', ex);
+      console.log('Error in API call', ex.response.data);
     }
 
     
@@ -277,7 +277,7 @@ export default function SignInSide() {
                     value="top"
                     control ={
                       <Checkbox
-                        marginTop={16}
+                        style={{marginTop: '16'}}
                         name="isSupplier"
                         id="isSupplier"
                         checked={user.isSupplier}

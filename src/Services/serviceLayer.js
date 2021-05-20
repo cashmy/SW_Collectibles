@@ -8,7 +8,7 @@ class ServiceLayer {
 
     // Request for User
     registerUser(data){
-        return axios.post('https://localhost:44394/api/authentication', data);
+        return axios.post('https://localhost:44394/api/authentication/register', data);
     }
 
     userLogin(data){
@@ -125,27 +125,27 @@ class ServiceLayer {
 
     //Request for Order Details
     getOrderDetails(){
-        return axios.get('https://localhost:44394/api/orderDetail')
+        return axios.get('https://localhost:44394/api/OrderDetail');
     }
 
     getOrderDetailById(id){
-        return axios.get(`https://localhost:44394/api/OrderDetails/${id}`)
+        return axios.get(`https://localhost:44394/api/OrderDetail/${id}`);
     }
 
     getOrderDetailByProduct(productId){
-        return axios.get(`https://localhost:44394/api/OrderDetails/${productId}`)
+        return axios.get(`https://localhost:44394/api/OrderDetail/${productId}`);
     }
 
     addProduct(data){
-        return axios.post(`https://localhost:44394/api/OrderDetails`, data)
+        return axios.post(`https://localhost:44394/api/OrderDetail`, data);
     }
 
     editOrderDetail(id, data){
-        return axios.put(`https://localhost:44394/api/OrderDetails/${id}`, data)
+        return axios.put(`https://localhost:44394/api/OrderDetail/${id}`, data);
     }
 
     deleteOrderDetail(id){
-        return axios.delete(`https://localhost:44394/api/OrderDetails/${id}`)
+        return axios.delete(`https://localhost:44394/api/OrderDetail/${id}`);
     }
 
     //Request for Order Header
