@@ -14,6 +14,7 @@ import PageHeader from '../PageHeader/PageHeader';
 import HistoryIcon from '@material-ui/icons/History';
 import ServiceLayer from '../../Services/serviceLayer';
 
+
 function OrderDetails(){
 
     const useStyles = makeStyles((theme) => ({
@@ -37,15 +38,19 @@ function OrderDetails(){
 
     useEffect(() => {
         getDetails();
+
       },[])
 
     async function getDetails(e){
+        debugger;
         try{
+        
             const response = await ServiceLayer.getOrderDetails();
             setOrderDetails(response.data);
+           
         }
         catch(e){
-            console.log('API call unsuccessful', e)
+            console.log('API call unsuccessful', e.response.data)
         }
     }
 
@@ -84,17 +89,17 @@ function OrderDetails(){
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                     <TableRow>
-                        <TableCell align="right">Product Name</TableCell>
-                        <TableCell align="right">Product Price</TableCell>
-                        <TableCell align="right">Quantity Ordered</TableCell>
-                        <TableCell align="right">Total Price</TableCell>
+                        <TableCell align="right"><Paper><center>Product Name</center></Paper></TableCell>
+                        <TableCell align="right"><Paper><center>Product Price</center></Paper></TableCell>
+                        <TableCell align="right"><Paper><center>Quantity Ordered</center></Paper></TableCell>
+                        <TableCell align="right"><Paper><center>Total Price</center></Paper></TableCell>
                      
                     </TableRow>
                     </TableHead>
                     <TableBody>
                     {details.map((orderDetails, i) => (
-                        <TableRow>
-                        <TableCell align="right">  {orderDetails.Product} </TableCell>
+                        <TableRow key={i}>
+                        <TableCell align="right">  {orderDetails.ProductId} </TableCell>
                         <TableCell align="right">{orderDetails.ProductPrice}</TableCell>
                         <TableCell align="right">{orderDetails.Quantity} </TableCell>
                         <TableCell align="right">{orderDetails.ExtPrice}</TableCell>
