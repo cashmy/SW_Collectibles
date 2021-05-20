@@ -1,44 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-      flexGrow: 1,
-    },
-    grid: {
-      padding: theme.spacing(2.5),
-    },
-    paper: {
-      maxWidth: '600px',
-      padding: theme.spacing(2),
-      margin: 'auto',
-    },
-    alignButtons: {
-      padding: theme.spacing(2),
-      display: 'flex',
-      justifyContent: 'flex-end',
-    },
-    buttonSpacing: {
-      paddingLeft: theme.spacing(2)
-    }
-}));
-
 export default function PaymentForm() {
-  const classes = useStyles();
   return (
-    <div >
-    <PageHeader 
-      title="Check Out"
-      subtitle="Creating an order from your shopping cart and submitting payment."
-      icon={<CheckCircleOutlineIcon/>}
-    />
-          <Grid container spacing={2} className={classes.grid} >
-         <Paper className={classes.paper} >
+    <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
@@ -74,30 +43,7 @@ export default function PaymentForm() {
             label="Remember credit card details for next time"
           />
         </Grid>
-
-        <Grid item xs={12} className={classes.alignButtons} >
-              <Grid item className={classes.buttonSpacing}>
-                <Button
-                  variant="contained"
-                >
-                  Back
-                </Button>
-              </Grid>
-
-              <Grid item className={classes.buttonSpacing}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                >
-                  Next
-                </Button>
-              </Grid>
-            </Grid>
-
       </Grid>
-      </Paper>
-      </Grid>
-
-    </div>
+    </React.Fragment>
   );
 }
