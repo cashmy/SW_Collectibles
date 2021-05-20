@@ -1,4 +1,5 @@
 import React, {useEffect, useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
@@ -37,15 +38,21 @@ const useStyles = makeStyles((theme) => ({
 function ListProducts() {
   const [products, setProducts] = useState([])
 
-const handleSubmit = (product, i) => {
-   let cart = []
-   if (i ==0){
+const addToCart = (product, i) => {
+  let cart = []
+  if (i ==0){
   cart.push(product);
-   }
+  }
   console.log(cart);
-   return cart;
+  return cart;
 }
 
+const history = useHistory();
+
+const viewProduct = (product) => {
+
+  history.push(`productDetails/${product}`);
+}
 
 useEffect(() => {
   getProducts();
@@ -59,10 +66,6 @@ async function getProducts(e){
   catch(e){
       console.log('API call unsuccessful', e)
   }
-}
-
-if (products){
-  console.log(products)
 }
 
   const classes = useStyles();
@@ -110,16 +113,21 @@ if (products){
                         <TableCell align="right">{product.productDescription}</TableCell>
                         <TableCell align="right">{product.productPrice}</TableCell>
                         <TableCell align="right">{product.productAverageRating}</TableCell>
-                        <TableCell align="right">{product.quantityOnHand}</TableCell>
-                        <TableCell align="right"><Button style={{backgroundColor: '#9C27B0'}} className="addToCart__btn" variant="outlined" onClick= {() => handleSubmit(product, i,)} >Add To Cart</Button>
-                        <Grid> <Link component={RouterLink} to={'productDetails'} product = {product} >
-                        <Controls.Button 
-                          aria-label="product list" 
-                          color="primary.light" 
-                          text="View Product Details"
-                          startIcon={<AddCircleOutlineIcon />}
-                        > </Controls.Button>
-                        </Link></Grid>
+                        <TableCell align="right">
+                          <Controls.Button
+                            onClick={() => addToCart(product, i)}
+                            color="primary.light" 
+                            text="Add To Cart"
+                            startIcon={<AddCircleOutlineIcon />}
+                          >
+                          </Controls.Button>
+                          <Controls.Button 
+                                aria-label="product list"
+                                color="primary.light" 
+                                text="View Product Details"
+                                startIcon={<AddCircleOutlineIcon />}
+                                onClick={() => viewProduct(product.productId)}
+                              > </Controls.Button>
                         </TableCell>
                         </TableRow>
                     ))}

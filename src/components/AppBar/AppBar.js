@@ -19,7 +19,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HistoryIcon from '@material-ui/icons/History';
 import ListIcon from '@material-ui/icons/List';
-// import ShowChartIcon from '@material-ui/icons/ShowChart';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
 
@@ -264,6 +264,14 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             </Link>
             
+            <Link component={RouterLink} to={'checkOut'} className={classes.navlink}>
+              <IconButton aria-label="show 5 cart items" color="inherit">
+
+                  <CheckCircleOutlineIcon />
+  
+              </IconButton>
+            </Link>
+
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />

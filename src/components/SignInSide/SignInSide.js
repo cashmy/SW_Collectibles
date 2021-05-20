@@ -84,6 +84,8 @@ export default function SignInSide() {
       });
 
       if(response.data.token !== null){
+        let token = response.data.token
+        window.localStorage.setItem('token', token)
         window.location.href='/productList';
       }
       else{
@@ -128,12 +130,12 @@ export default function SignInSide() {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="username"
               label="Username"
-              name="email"
-              value={user.email}
+              name="username"
+              value={user.username}
               onChange={onChangeUsername}
-              autoComplete="email"
+              autoComplete="username"
               autoFocus
             />
             <TextField

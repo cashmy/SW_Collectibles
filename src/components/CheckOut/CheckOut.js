@@ -79,12 +79,25 @@ function getStepContent(step) {
   }
 }
 
+function processOrderHandling() {
+  // Add axios call to Order Header and Details here
+  return false
+}
+
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+
+    if(activeStep == steps.length - 1) {
+      var addData = processOrderHandling()
+      if (!addData) {
+        alert("There was an error processing your information. Please try again later.")
+        setActiveStep(activeStep)
+      }
+    }
   };
 
   const handleBack = () => {
@@ -93,14 +106,6 @@ export default function Checkout() {
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
@@ -146,7 +151,6 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
       </main>
     </React.Fragment>
   );
