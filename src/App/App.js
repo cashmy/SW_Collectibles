@@ -13,6 +13,19 @@ import OrderDetails from '../components/OrderDetails/OrderDetails'
 import addProducts from "../components/AddProducts/addProducts"
 import RegistrationSide from "../components/RegistrationSide/RegistrationSide"
 import shoppingCart from "../components/ShoppingCart/shoppingCart"
+import Paper from '@material-ui/core/Paper';
+import BackgroundImage from '../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
+
+const styles = {
+  paperContainer: {
+    backgroundImage: `url(${BackgroundImage})`, 
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    height: "100vh"
+  }
+};
 
 class App extends Component {
   state = {}
@@ -28,7 +41,7 @@ class App extends Component {
   render() {
     const user = this.state.user;
     return (
-      <div >
+      <Paper style={styles.paperContainer} >
           <CssBaseline />
           <AppBar user={user} />
           <Switch>
@@ -51,7 +64,7 @@ class App extends Component {
             <SignInSide />
           </Switch>
           <Footer />
-      </div>
+      </Paper>
     );
   }
 }

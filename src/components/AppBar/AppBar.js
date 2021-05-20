@@ -90,9 +90,6 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     listStyle: 'none',
     position: 'relative',
-    '& current': {
-      borderBottom: '1px solid black'
-    }
   }
 }));
 
@@ -239,16 +236,14 @@ export default function PrimarySearchAppBar() {
             </Link>
 
           {/* Icons with Badges */}
-              <Link component={RouterLink} to={'shoppingCart'}>
-            <IconButton aria-label="show 5 cart items" color="inherit">
-            
-              <Badge badgeContent={5} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+            <Link component={RouterLink} to={'shoppingCart'} className={classes.navlink}>
+              <IconButton aria-label="show 5 cart items" color="inherit">
+                <Badge badgeContent={5} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
             </Link>
             
-
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
