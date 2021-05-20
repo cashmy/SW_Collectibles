@@ -36,9 +36,11 @@ export default function FormPropsTextFields() {
     categoryId: product.categoryId,
     productAverageRating: product.productAverageRating
   }
+  debugger;
   try{
-    const response = await axios.post(`https://localhost:44394/api/Products`, data);
-    console.log(response);
+    const jwt = localStorage.getItem('token')
+    const response = await axios.post(`https://localhost:44394/api/Products`, data , {headers: {Authorization: 'Bearer ' + jwt}},);
+    console.log(response); 
     setProduct({
       productDescription: data.productDescription,
       productPrice: data.productPrice,
