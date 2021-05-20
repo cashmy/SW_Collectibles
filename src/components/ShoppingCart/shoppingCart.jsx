@@ -13,7 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
-import HistoryIcon from '@material-ui/icons/History';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
@@ -49,9 +49,9 @@ export default function BasicTable() {
   return (
       <div>
       <PageHeader 
-        title="Order History"
-        subtitle="Full listing of all your complete orders."
-        icon={<HistoryIcon/>}
+        title="Shopping Cart"
+        subtitle="Items you have currently chosen to purchase."
+        icon={<ShoppingCartIcon/>}
       />     
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
