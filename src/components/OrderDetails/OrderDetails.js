@@ -61,8 +61,6 @@ function OrderDetails(){
       /> 
           
         <div><center style={{marginTop: "2rem"}}>Order Number: Date Purchased</center></div>
-
-               
         <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
           <Grid item xs={2} style={{marginBottom: "2rem"}}>
