@@ -66,6 +66,18 @@ export default function BasicTable() {
     }
   }
 
+  async function deleteCart(productId){
+    try{
+        const response = await ServiceLayer.deleteCart(productId);
+        setCartItems(response.data);
+    }
+    catch(e){
+        console.log('API call unsuccessful')
+    }
+  }
+
+
+
 
   return (
       <div>
@@ -87,26 +99,26 @@ export default function BasicTable() {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-           
-                        <TableRow>
-                        <TableCell component="th" scope="row">Super Fast RC car</TableCell>
-                        <TableCell align="right">50$</TableCell>
-                            <TableCell align="right">
-                            <ButtonGroup size="small" aria-label="small outlined button group">
-                            <Button disabled={counter >= 50 } onClick={()=> 
-                            {setCounter(counter+1)}}>+</Button>
-                        {<Button disabled>{counter}</Button>}
-                        {<Button disabled={counter <= 0} onClick={() => {
-                            setCounter(counter - 1)
-                            }}>-</Button>}
-                    </ButtonGroup>
-                    </TableCell>
+                        {cartItems.map((items, i) => (
+                        <TableRow key={i}>
+                            <TableCell component="th" scope="row">{items.ProductId}</TableCell>
+                            <TableCell align="right">50$</TableCell>
+                                <TableCell align="right">
+                                <ButtonGroup size="small" aria-label="small outlined button group">
+                                <Button disabled={counter >= 50 } onClick={()=> 
+                                {setCounter(counter+1)}}> + </Button>
+                            {<Button disabled>{counter}</Button>}
+                            {<Button disabled={counter <= 0} onClick={() => {
+                                setCounter(counter - 1)
+                                }}> - </Button>}
+                                </ButtonGroup>
+                        </TableCell>
                         <TableCell align="right">                       
-                        <button> RunFunction() </button> </TableCell>
+                        <button onClick={() => deleteCart(items.ProductId)}> Remove </button> </TableCell>
 
  
                         </TableRow>
-       
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>
