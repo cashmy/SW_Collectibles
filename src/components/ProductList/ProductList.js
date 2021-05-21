@@ -84,27 +84,38 @@ async function getProducts(e){
                 text="Add New Products"
                 startIcon={<AddCircleOutlineIcon />}
               > Add New Products</Controls.Button>
-              </Link></Grid>
+              </Link>
+              <Link component={RouterLink} to={'addCategory'}  >
+              <Controls.Button 
+                aria-label="product list" 
+                color="primary.light" 
+                text="Add A Category"
+                startIcon={<AddCircleOutlineIcon />}
+              > Add New Products</Controls.Button>
+              </Link>
+              </Grid>
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                     <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Image</TableCell>
+                        <TableCell align="right">Name</TableCell>
+                        <TableCell align="right">Description</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="right">Rating</TableCell>
+                        <TableCell align="right">Quantity</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
                     {products.map((product, i) => (
                         <TableRow key={i}>
+                        <TableCell align="right">{product.productName}</TableCell>
                         <TableCell align="right">{product.productDescription}</TableCell>
-                        <TableCell align="right">{product.productImage}</TableCell>
                         <TableCell align="right">{product.productPrice}</TableCell>
                         <TableCell align="right">{product.productAverageRating}</TableCell>
+                        <TableCell align="right">{product.quantityOnHand}</TableCell>
                         <TableCell align="right">
                           <Controls.Button
                             onClick={() => addToCart(product, i)}
