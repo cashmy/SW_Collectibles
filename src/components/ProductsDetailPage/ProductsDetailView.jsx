@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import jwtDecode from 'jwt-decode';
-import { renderIntoDocument } from 'react-dom/test-utils';
+
 
 function ProductsDetailView(props) {
     let url = props.location.pathname;
@@ -26,7 +26,8 @@ function ProductsDetailView(props) {
         userId: userId,
         reviewRating: null,
         reviewText: '',
-        rated: false
+        rated: false,
+        edited: false
     });
     const [hover, setHover] = useState(null);
 
@@ -60,8 +61,22 @@ function ProductsDetailView(props) {
         }
     }
 
+    async function addToCart(){
+        debugger;
+        const data = {
+            userId: userReview.userId,
+            productId: userReview.productId,
+            quantity: 1
+        }
+        try{    
+            const response = await ServiceLayer.addToCart(productId, data);
+            console.log('Status Code', response.status);
+        }catch(e){
+            console.log('API call unsuccessful', e.response.data);
+        }
+    }
+
     async function addRating(){
-        //debugger;
         const data = {
             productId: userReview.productId,
             userId: userReview.userId,
@@ -70,7 +85,7 @@ function ProductsDetailView(props) {
         }
         try{
             const response = await ServiceLayer.addRating(userId, productId, data);
-            console.log(response);
+            console.log(response.data);
         }
         catch(e){
             console.log('API call unsuccessful', e.response.data);
@@ -101,7 +116,7 @@ function ProductsDetailView(props) {
 
     const handleSubmit = () => {
         reviews.forEach(r => {
-            if(userReview.userId == r.userId && userReview.productId == r.productId){
+            if(userReview.userId === r.userId && userReview.productId === r.productId){
                 reviews.pop(r);
             }
         })
@@ -109,7 +124,8 @@ function ProductsDetailView(props) {
         addReview();
         setUserReview({
             ...userReview,
-            rated: false
+            rated: false,
+            edited: true
         });
         reviews.push(userReview);
     }
@@ -130,10 +146,40 @@ function ProductsDetailView(props) {
             return (
                 <div className="product__details-right" >
                     <ul style={{listStyle:"none"}}>
-                        <li>Price: ${product.productPrice}</li>
-                        <li>Rating: {product.productAverageRating} out of 5</li>
-                        <li>Inventory: {product.quantityOnHand} remaining!</li>
-                        <li><Button style={{backgroundColor: '#9C27B0'}} className="addToCart__btn" variant="outlined" >Add To Cart</Button></li>
+                        <li style={{fontSize: '20px'}}><h3 style={{margin: '0'}}>Price: ${product.productPrice}</h3></li>
+                        <li>
+                        <h4 style={{fontSize: '20px', margin: '0'}}>Rating:</h4>
+                        <div style={{display: 'flex', justifyContent: 'center'}}>
+                            {[...Array(5)].map((star, i) => {
+                            const ratingValue = i + 1;
+
+                            return (
+                            <div key={i}>
+                                {ratingValue <= product.productAverageRating ? 
+                                    <span>
+                                        <StarIcon
+                                        style={{fill:'#F7C631'}}
+                                        fontSize='large' 
+                                        />
+                                    </span>
+                                :  
+                                    <span>
+                                        <StarIcon
+                                        style={{fill:'#A5A8AC'}}
+                                        fontSize='large' 
+                                        />
+                                    </span>
+                                
+                                }
+
+                            </div>
+                                );
+                                })}
+                        </div> 
+
+                        </li>
+                        <li><h3 style={{margin: '0', fontSize: '20px'}}>Inventory: {product.quantityOnHand} remaining! </h3></li>
+                        <li><Button style={{backgroundColor: '#F96B41'}} className="addToCart__btn" variant='contained' onClick={() => addToCart()} >Add To Cart</Button></li>
                     </ul>
                 </div>
             )
@@ -163,14 +209,29 @@ function ProductsDetailView(props) {
                     return (
                             <div key={i}>
                                 <label>
+                                    {ratingValue <= (hover || userReview.reviewRating) ?  
+                                    <>
                                     <input  type='radio' name='rating' value={ratingValue} onClick={()=>setUserReview({...userReview, reviewRating: ratingValue, rated: true})} />
                                     <StarIcon className='star' 
                                     fontSize='large' 
-                                    color={ratingValue <= (hover || userReview.reviewRating) ? 'primary' : 'secondary'} 
+                                    style={{fill: '#F7C631'}}
                                     onMouseEnter={()=>setHover(ratingValue)} 
                                     onMouseLeave={()=>setHover(null)}
                                     
                                     />
+                                    </>
+                                    :
+                                    <>
+                                    <input  type='radio' name='rating' value={ratingValue} onClick={()=>setUserReview({...userReview, reviewRating: ratingValue, rated: true})} />
+                                    <StarIcon className='star' 
+                                    fontSize='large' 
+                                    style={{fill: '#A5A8AC'}}
+                                    onMouseEnter={()=>setHover(ratingValue)} 
+                                    onMouseLeave={()=>setHover(null)}
+                                    />
+                                    </>
+                                    }
+
                                 </label>
                             </div>
                 );
@@ -201,30 +262,30 @@ function ProductsDetailView(props) {
             </Grid>
         <Grid container direction="row" spacing={1} style={{margin: "2rem"}}>
             <div>
-                {!userReview.rated ? <Button variant='contained' color="primary" onClick={()=>setUserReview({...userReview, rated: true})}>Add A Review</Button> : <></> }
+                {!userReview.rated && !userReview.edited ? <Button variant='contained' color="primary" onClick={()=>setUserReview({...userReview, rated: true})}>Add A Review</Button> 
+                : <></>  }
+                {userReview.edited && !userReview.rated ? <Button variant='contained' color="primary" onClick={()=>setUserReview({...userReview, rated: true,})}>Edit Review</Button> 
+                : <></> }
                 
                 {userReview.rated ? 
                 <>
                 
                 <form noValidate onSubmit={() => handleSubmit()} >
                     <span style={{display: 'flex'}}>
-                <Input 
-                multiline
-                name="review"
-                value={userReview.reviewText}
-                onChange={onChangeReview}
-                placeholder=" Add A Review"
-                type="text"
-                id='review'
-                className='review__input'
-                />
-                {starRating()}
+                    <Input 
+                    multiline
+                    name="review"
+                    value={userReview.reviewText}
+                    onChange={onChangeReview}
+                    placeholder=" Add A Review"
+                    type="text"
+                    id='review'
+                    className='review__input'
+                    />
+                    {starRating()}
                     </span>
-                <Button type='submit' style={{marginLeft: '5px'}} variant='contained' color='primary' onClick={() => handleSubmit()}>Submit Review</Button>
-
+                <Button type='submit' style={{marginLeft: '5px'}} variant='contained' color='primary' onClick={() => handleSubmit()}>Submit</Button>
                 </form>
-                
-
                 </>
                 : <></> }
                 
