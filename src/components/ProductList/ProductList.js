@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
 import ListIcon from '@material-ui/icons/List';
@@ -38,26 +39,35 @@ const useStyles = makeStyles((theme) => ({
 function ListProducts() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
+  const classes = useStyles();
 
+<<<<<<< HEAD
     const addToCart = (product, i) => {
       let cart = []
       if (i === 0){
       cart.push(product);
       }
     }
+=======
+  const addToCart = (product, i) => {
+    let cart = []
+    if (i === 0){
+    cart.push(product);
+    }
+  }
+>>>>>>> 45cfeaee163f4e86fba63c6f0bc1966f1c2c5e38
   const history = useHistory();
 
   const viewProduct = (product) => {
-
     history.push(`productDetails/${product}`);
   }
 
   useEffect(() => {
-    getProducts();
-    getCategories();
+  //   getProducts();
+  //   getCategories();
   },[])
 
-  async function getProducts(e){
+async function getProducts(e){
     try{
         const response = await ServiceLayer.getAllProducts();
         setProducts(response.data);
@@ -66,6 +76,7 @@ function ListProducts() {
         console.log('API call unsuccessful', e)
     }
   }
+
   async function getCategories(e){
     try{
         const response = await ServiceLayer.getCategories();
@@ -75,7 +86,12 @@ function ListProducts() {
         console.log('API call unsuccessful', e)
     }
   }
+<<<<<<< HEAD
    const handleInput = (event) => {
+=======
+
+  const handleInput = (event) => {
+>>>>>>> 45cfeaee163f4e86fba63c6f0bc1966f1c2c5e38
     setProducts({search:event.target.value});
     const filteredProducts = getProducts.filter(element => {
       if(event.target.value === ""){
@@ -83,13 +99,19 @@ function ListProducts() {
         return element
       }
       return element.productName.includes(products.search)
+<<<<<<< HEAD
     })
     setProducts({
     products: filteredProducts
   })
+=======
+    })
+    setProducts({
+      products: filteredProducts
+    })
+>>>>>>> 45cfeaee163f4e86fba63c6f0bc1966f1c2c5e38
   }
 
-  const classes = useStyles();
 
   return (
       <div>
@@ -119,7 +141,7 @@ function ListProducts() {
                 <TextField required id="standard"
                 label="Search By Name" 
                 defaultValue="" 
-                onChange={handleInput}
+                // onChange={handleInput}
                  />
                 </Grid></Paper>
       <Grid container spacing={2} className={classes.grid} >

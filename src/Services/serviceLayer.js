@@ -29,11 +29,6 @@ class ServiceLayer {
         return axios.put('https://localhost:44394/api/user', data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    setUserRole(userId){
-        const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/user/${userId}/setRole`, {headers: {Authorization: 'Bearer ' + jwt}});
-    }
-
     deleteUser(){
         const jwt = localStorage.getItem('token')
         return axios.delete('https://localhost:44394/api/user', {headers: {Authorization: 'Bearer ' + jwt}});
