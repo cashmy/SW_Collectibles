@@ -100,7 +100,8 @@ async function getProducts(e){
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                     <TableRow>
-                        <TableCell>Name</TableCell>
+                        <TableCell align="right">Name</TableCell>
+                        <TableCell align="right">Description</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="right">Rating</TableCell>
                         <TableCell align="right">Quantity</TableCell>
@@ -110,9 +111,11 @@ async function getProducts(e){
                     <TableBody>
                     {products.map((product, i) => (
                         <TableRow key={i}>
+                        <TableCell align="right">{product.productName}</TableCell>
                         <TableCell align="right">{product.productDescription}</TableCell>
                         <TableCell align="right">{product.productPrice}</TableCell>
                         <TableCell align="right">{product.productAverageRating}</TableCell>
+                        <TableCell align="right">{product.quantityOnHand}</TableCell>
                         <TableCell align="right">
                           <Controls.Button
                             onClick={() => addToCart(product, i)}
