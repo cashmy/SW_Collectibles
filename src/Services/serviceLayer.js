@@ -95,19 +95,19 @@ class ServiceLayer {
     //Request for ShoppingCart
     
     getUserCart(id){
-        return axios.get(`https://localhost:44394/api/ShoppingCart/${id}/cart`);
+        return axios.get('https://localhost:44394/api/ShoppingCart/');
     }
 
     addToCart(id, data){
-        return axios.post(`https://localhost:44394/api/ShoppingCart/${id}/postCart`, data)
+        return axios.post('https://localhost:44394/api/ShoppingCart/', data)
     }
 
     editCart(id, productId, data){
-        return axios.put(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/edit`, data);
+        return axios.put(`https://localhost:44394/api/ShoppingCart/${productId}`, data);
     }
 
     deleteCart(id, productId){
-        return axios.delete(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/delete`);
+        return axios.delete(`https://localhost:44394/api/ShoppingCart/${productId}`);
     }
 
     //Request for SupplierProducts
