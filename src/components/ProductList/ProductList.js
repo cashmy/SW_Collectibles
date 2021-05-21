@@ -14,10 +14,8 @@ import ListIcon from '@material-ui/icons/List';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
-import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import ServiceLayer from '../../Services/serviceLayer'
-import { Button } from '@material-ui/core';
-import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,13 +38,10 @@ function ListProducts() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
 
-  const addToCart = (product, i) => {
-    let cart = []
-    if (i ==0){
-    cart.push(product);
-    }
-    console.log(cart);
-    return cart;
+const addToCart = (product, i) => {
+  let cart = []
+  if (i === 0){
+  cart.push(product);
   }
 
   const history = useHistory();

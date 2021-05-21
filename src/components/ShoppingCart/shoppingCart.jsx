@@ -1,10 +1,7 @@
-
-
-import { useState } from 'react';
+import React from 'react'
+import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,7 +13,7 @@ import PageHeader from '../PageHeader/PageHeader';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-
+import ServiceLayer from '../../Services/serviceLayer'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +41,30 @@ const useStyles = makeStyles((theme) => ({
 export default function BasicTable() {
   const classes = useStyles();
   const [counter, setCounter] = useState(0);
+  const [cartItems, setCartItems] = useState([])
+
+  // ** cartItems from database are:
+  // cartItem.userId
+  // cartItem.productId
+  // cartItem.productName
+  // cartItem.productDescription
+  // cartItem.quantity
+  // cartItem.productPrice
+  // cartItem.extPrice 
+
+  useEffect(() => {
+    getCart();
+  },[])
+
+  async function getCart(e){
+    try{
+        const response = await ServiceLayer.getUserCart();
+        setCartItems(response.data);
+    }
+    catch(e){
+        console.log('API call unsuccessful', e)
+    }
+  }
 
 
   return (
