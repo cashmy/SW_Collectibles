@@ -113,7 +113,7 @@ export default function BasicTable() {
                           <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartItem.extPrice)}</TableCell>
                           <TableCell align="right">
                               <ButtonGroup size="small" aria-label="small outlined button group">
-                                <Button disabled={counter >= 50 } onClick={()=> {setCounter(counter+1)}}> + </Button>
+                                   <Button disabled={counter >= 50 } onClick={()=> {setCounter(counter+1)}}> + </Button>
                                   {<Button disabled>{cartItem.quantity}</Button>}
                                   {<Button disabled={counter <= 0} onClick={() => {setCounter(counter - 1) }}> - </Button>}
                               </ButtonGroup>
