@@ -60,6 +60,7 @@ export default function BasicTable() {
     try{
         const response = await ServiceLayer.getUserCart();
         setCartItems(response.data);
+        console.log(response.data[0])
     }
     catch(e){
         console.log('API call unsuccessful', e)
