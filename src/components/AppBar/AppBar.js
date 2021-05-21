@@ -261,7 +261,7 @@ export default function PrimarySearchAppBar() {
               <Controls.Button 
                 aria-label="category list" 
                 color="default" 
-                text="Categoryies" 
+                text="Categories" 
                 startIcon={<CategoryIcon 
               />}>Orders</Controls.Button>
             </Link>

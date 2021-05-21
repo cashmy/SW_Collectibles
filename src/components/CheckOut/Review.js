@@ -7,13 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import ServiceLayer from '../../Services/serviceLayer'
 
-// const shoppingCartItems = [
-//   { productName: 'Product 1', productDescription: 'A nice thing', extPrice: '$9.99' },
-//   { productName: 'Product 2', productDescription: 'Another thing', extPrice: '$3.45' },
-//   { productName: 'Product 3', productDescription: 'Something else', extPrice: '$6.51' },
-//   { productName: 'Product 4', productDescription: 'Best thing of all', extPrice: '$14.11' },
-//   { productName: 'Shipping', productDescription: '', price: 'Free' },
-// ];
 
 const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
