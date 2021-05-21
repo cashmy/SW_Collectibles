@@ -39,6 +39,7 @@ function ListProducts() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const classes = useStyles();
+  const [searching, setSearching]= useState([])
 
   const addToCart = (product, i) => {
     let cart = []
@@ -68,6 +69,7 @@ async function getProducts(e){
     }
   }
 
+
   async function getCategories(e){
     try{
         const response = await ServiceLayer.getCategories();
@@ -79,14 +81,14 @@ async function getProducts(e){
   }
    const mapProducts = () => {
         return (
-          products.map((i) => (
+          products.map((p, i) => (
           <TableRow key={i}>
-                        <TableCell align="right">{i.productName}</TableCell>
-                        <TableCell align="right">{i.productDescription}</TableCell>
-                        <TableCell align="right">{i.productPrice}</TableCell>
-                        <TableCell align="right">{i.productAverageRating}</TableCell>
-                        <TableCell align="right">{i.quantityOnHand}</TableCell>
-                        <TableCell align="right">{i.categoryId}</TableCell>
+                        <TableCell align="right">{p.productName}</TableCell>
+                        <TableCell align="right">{p.productDescription}</TableCell>
+                        <TableCell align="right">{p.productPrice}</TableCell>
+                        <TableCell align="right">{p.productAverageRating}</TableCell>
+                        <TableCell align="right">{p.quantityOnHand}</TableCell>
+                        <TableCell align="right">{p.categoryId}</TableCell>
                         <TableCell align="right">
                           <Controls.Button
                             onClick={() => addToCart(products.product, i)}
@@ -100,7 +102,7 @@ async function getProducts(e){
                                 color="primary.light" 
                                 text="View Product Details"
                                 startIcon={<AddCircleOutlineIcon />}
-                                onClick={() => viewProduct(i.productId)}
+                                onClick={() => viewProduct(p.productId)}
                               > </Controls.Button>
                         </TableCell>
                         </TableRow>
@@ -109,19 +111,27 @@ async function getProducts(e){
         )} 
 
   const handleInput = (event) => {
-    setProducts({search:event.target.value});
-    debugger;
-    const filteredProducts = mapProducts.filter(element => {
+
+   let targetValue = event.target.value;
+    console.log(event.target.value)
+    
+    const filteredProducts = products.filter(element => {
+      debugger;
       if(event.target.value === ""){
         getProducts();
+        element = products;
         return element
       }
-      return element.productName.includes(products.search)
+    
+      else if (element.productName.includes(targetValue)){
+        console.log(element)  
+        return element
+      };
     })
-    setProducts({
-      products: filteredProducts
-    })
+    console.log(filteredProducts)
+    setProducts(filteredProducts)
   }
+  
 
 
   return (
