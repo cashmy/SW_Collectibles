@@ -63,7 +63,7 @@ export default function Review() {
         {cartItems.map((cartItem) => (
           <ListItem className={classes.listItem} key={cartItem.productId}>
             <ListItemText primary={cartItem.productName} secondary={cartItem.productDescription} />
-            <Typography variant="body2">{cartItem.extPrice}</Typography>
+            <Typography variant="body2">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartItem.extPrice)}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>
