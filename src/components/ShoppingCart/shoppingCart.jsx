@@ -68,7 +68,7 @@ export default function BasicTable() {
         console.log(response.data)
     }
     catch(e){
-        console.log('API call unsuccessful', e)
+        console.log("Get User's Shopping Cart API call unsuccessful", e)
     }
   }
 
@@ -78,7 +78,7 @@ export default function BasicTable() {
         setCartItems(response.data);
     }
     catch(e){
-        console.log('API call unsuccessful')
+        console.log('Delete Cart Item API call unsuccessful')
     }
   }
 
@@ -121,13 +121,13 @@ export default function BasicTable() {
                           <TableCell align="right">
                           <IconButton
                               color="primary"
-                              onClick={() => productDetails(cartItem.ProductId)}
+                              onClick={() => productDetails(cartItem.productId)}
                             >
                               <VisibilityIcon />
                             </IconButton> 
                             <IconButton
                               color="secondary"
-                              onClick={() => deleteCart(cartItem.ProductId)}
+                              onClick={() => deleteCart(cartItem.productId)}
                             >
                               <DeleteIcon />
                             </IconButton>                       
