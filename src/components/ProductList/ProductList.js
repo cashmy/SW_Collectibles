@@ -53,8 +53,8 @@ function ListProducts() {
   }
 
   useEffect(() => {
-  //   getProducts();
-  //   getCategories();
+    getProducts();
+    getCategories();
   },[])
 
 async function getProducts(e){
@@ -120,7 +120,7 @@ async function getProducts(e){
                 <TextField required id="standard"
                 label="Search By Name" 
                 defaultValue="" 
-                // onChange={handleInput}
+                onChange={handleInput}
                  />
                 </Grid></Paper>
       <Grid container spacing={2} className={classes.grid} >

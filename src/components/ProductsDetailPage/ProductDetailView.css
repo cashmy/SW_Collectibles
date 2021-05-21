@@ -31,6 +31,21 @@
     line-height: 3;
 }
 
+.star{
+    cursor: pointer;
+    transition: color 200ms;
+}
+
+input[type='radio'] {
+    display: none;
+}
+
+.review__input {
+    border: 1px solid black;
+    margin: 7px;
+    width: 30rem;
+}
+
 
 
 #Reviews {

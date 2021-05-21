@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,8 +13,11 @@ import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import ServiceLayer from '../../Services/serviceLayer'
+import DeleteIcon from '@material-ui/icons/Delete';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BasicTable() {
   const classes = useStyles();
+  const history = useHistory();
   const [counter, setCounter] = useState(0);
   const [cartItems, setCartItems] = useState([])
 
@@ -60,7 +65,7 @@ export default function BasicTable() {
     try{
         const response = await ServiceLayer.getUserCart();
         setCartItems(response.data);
-        console.log(response.data[0])
+        console.log(response.data)
     }
     catch(e){
         console.log('API call unsuccessful', e)
@@ -77,7 +82,9 @@ export default function BasicTable() {
     }
   }
 
-
+  const productDetails = (productId) => {
+      history.push(`productDetails/${productId}`);
+  }
 
 
   return (
@@ -96,28 +103,35 @@ export default function BasicTable() {
                         <TableCell>Product</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="right">Quantity</TableCell>
-                        <TableCell align="right">Remove From Cart</TableCell>
+                        <TableCell align="right">Actions</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cartItems.map((items, i) => (
+                        {cartItems.map((cartItem, i) => (
                         <TableRow key={i}>
-                            <TableCell component="th" scope="row">{items.productId}</TableCell>
-                            <TableCell align="right">50$</TableCell>
-                                <TableCell align="right">
-                                <ButtonGroup size="small" aria-label="small outlined button group">
-                                <Button disabled={counter >= 50 } onClick={()=> 
-                                {setCounter(counter+1)}}> + </Button>
-                            {<Button disabled>{counter}</Button>}
-                            {<Button disabled={counter <= 0} onClick={() => {
-                                setCounter(counter - 1)
-                                }}> - </Button>}
-                                </ButtonGroup>
-                        </TableCell>
-                        <TableCell align="right">                       
-                        <button onClick={() => deleteCart(items.productId)}> Remove </button> </TableCell>
-
- 
+                          <TableCell component="th" scope="row">{cartItem.productName}</TableCell>
+                          <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartItem.extPrice)}</TableCell>
+                          <TableCell align="right">
+                              <ButtonGroup size="small" aria-label="small outlined button group">
+                                <Button disabled={counter >= 50 } onClick={()=> {setCounter(counter+1)}}> + </Button>
+                                  {<Button disabled>{cartItem.quantity}</Button>}
+                                  {<Button disabled={counter <= 0} onClick={() => {setCounter(counter - 1) }}> - </Button>}
+                              </ButtonGroup>
+                          </TableCell>
+                          <TableCell align="right">
+                          <IconButton
+                              color="primary"
+                              onClick={() => productDetails(cartItem.ProductId)}
+                            >
+                              <VisibilityIcon />
+                            </IconButton> 
+                            <IconButton
+                              color="secondary"
+                              onClick={() => deleteCart(cartItem.ProductId)}
+                            >
+                              <DeleteIcon />
+                            </IconButton>                       
+                          </TableCell>
                         </TableRow>
                         ))}
                     </TableBody>
