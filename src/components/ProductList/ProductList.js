@@ -15,7 +15,8 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
-import ServiceLayer from '../../Services/serviceLayer'
+import ServiceLayer from '../../Services/serviceLayer';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,12 +39,12 @@ function ListProducts() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
 
-const addToCart = (product, i) => {
-  let cart = []
-  if (i === 0){
-  cart.push(product);
-  }
-
+    const addToCart = (product, i) => {
+      let cart = []
+      if (i === 0){
+      cart.push(product);
+      }
+    }
   const history = useHistory();
 
   const viewProduct = (product) => {
@@ -74,16 +75,16 @@ const addToCart = (product, i) => {
         console.log('API call unsuccessful', e)
     }
   }
-  handleInput = (event) => {
-    setState({search:event.target.value});
-    const filteredProducts = getAllProducts.filter(element => {
+   const handleInput = (event) => {
+    setProducts({search:event.target.value});
+    const filteredProducts = getProducts.filter(element => {
       if(event.target.value === ""){
-        getAllProducts();
+        getProducts();
         return element
       }
-      return element.productName.includes(search)
+      return element.productName.includes(products.search)
     })
-  setState({
+    setProducts({
     products: filteredProducts
   })
   }
