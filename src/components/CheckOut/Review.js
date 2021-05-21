@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import ServiceLayer from '../../Services/serviceLayer'
 
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
+// const shoppingCartItems = [
+//   { productName: 'Product 1', productDescription: 'A nice thing', extPrice: '$9.99' },
+//   { productName: 'Product 2', productDescription: 'Another thing', extPrice: '$3.45' },
+//   { productName: 'Product 3', productDescription: 'Something else', extPrice: '$6.51' },
+//   { productName: 'Product 4', productDescription: 'Best thing of all', extPrice: '$14.11' },
+//   { productName: 'Shipping', productDescription: '', price: 'Free' },
+// ];
+
 const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
   { name: 'Card type', detail: 'Visa' },
@@ -35,6 +37,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review() {
   const classes = useStyles();
+  const [cartItems, setCartItems] = useState([])
+
+  useEffect(() => {
+    getCart();
+  },[])
+
+  async function getCart(e){
+    try{
+        const response = await ServiceLayer.getUserCart();
+        console.log(response.data)
+        setCartItems(response.data);
+    }
+    catch(e){
+        console.log('API call unsuccessful', e)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -42,10 +60,10 @@ export default function Review() {
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        {cartItems.map((cartItem) => (
+          <ListItem className={classes.listItem} key={cartItem.productId}>
+            <ListItemText primary={cartItem.productName} secondary={cartItem.productDescription} />
+            <Typography variant="body2">{cartItem.extPrice}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>

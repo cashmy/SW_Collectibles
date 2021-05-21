@@ -3,7 +3,7 @@ import axios from 'axios';
 class ServiceLayer {
 
     // Example to get Token
-     //jwt = localStorage.getItem('token')
+    jwt = localStorage.getItem('token')
     //return http.post('authentication/login',{headers: {Authorization: 'Bearer ' + jwt}}, data);
 
     // Request for User
@@ -31,7 +31,7 @@ class ServiceLayer {
 
     setUserRole(id){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/user/${id}/setRole`);
+        return axios.post(`https://localhost:44394/api/user/${id}/setRole`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     deleteUser(id){
@@ -107,40 +107,24 @@ class ServiceLayer {
 
     //Request for ShoppingCart
     
-    getUserCart(id){
-<<<<<<< HEAD
-        return axios.get('https://localhost:44394/api/ShoppingCart/');
-    }
-
-    addToCart(id, data){
-        return axios.post('https://localhost:44394/api/ShoppingCart/', data)
-    }
-
-    editCart(id, productId, data){
-        return axios.put(`https://localhost:44394/api/ShoppingCart/${productId}`, data);
-    }
-
-    deleteCart(id, productId){
-        return axios.delete(`https://localhost:44394/api/ShoppingCart/${productId}`);
-=======
+    getUserCart(){
         const jwt = localStorage.getItem('token')
-        return axios.get(`https://localhost:44394/api/ShoppingCart/${id}/cart`,{headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.get('https://localhost:44394/api/ShoppingCart/', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    addToCart(id, data){
+    addToCart(data){
         const jwt = localStorage.getItem('token')
-        return axios.post(`https://localhost:44394/api/ShoppingCart/${id}/postCart`, data, {headers: {Authorization: 'Bearer ' + jwt}})
+        return axios.post('https://localhost:44394/api/ShoppingCart/', data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
-    editCart(id, productId, data){
+    editCart(productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.put(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/edit`, data, {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.put(`https://localhost:44394/api/ShoppingCart/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    deleteCart(id, productId){
+    deleteCart(productId){
         const jwt = localStorage.getItem('token')
-        return axios.delete(`https://localhost:44394/api/ShoppingCart/${id}/${productId}/delete`, {headers: {Authorization: 'Bearer ' + jwt}});
->>>>>>> 8612d9ce1fd15a84479d0bd568088f1660827aec
+        return axios.delete(`https://localhost:44394/api/ShoppingCart/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     //Request for SupplierProducts
@@ -174,7 +158,7 @@ class ServiceLayer {
         return axios.get(`https://localhost:44394/api/OrderDetail/${productId}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    addProduct(data){
+    addOrderDetail(data){
         const jwt = localStorage.getItem('token')
         return axios.post(`https://localhost:44394/api/OrderDetail`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }

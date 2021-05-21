@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Controls from '../controls/Controls';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Paper from '@material-ui/core/Paper';
-import axios from 'axios';
-import { LocalConvenienceStoreOutlined, SettingsInputSvideoRounded } from '@material-ui/icons';
+// import axios from 'axios';
+// import { LocalConvenienceStoreOutlined, SettingsInputSvideoRounded } from '@material-ui/icons';
 import serviceLayer from '../../Services/serviceLayer';
 const useStyles = makeStyles((theme) => ({
   root: {
