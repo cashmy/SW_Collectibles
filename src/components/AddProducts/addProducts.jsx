@@ -6,8 +6,9 @@ import Controls from '../controls/Controls';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
-import { LocalConvenienceStoreOutlined, SettingsInputSvideoRounded } from '@material-ui/icons';
-import serviceLayer from '../../Services/serviceLayer';
+// import { LocalConvenienceStoreOutlined, SettingsInputSvideoRounded } from '@material-ui/icons';
+// import serviceLayer from '../../Services/serviceLayer';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -25,7 +26,8 @@ export default function FormPropsTextFields() {
     productPrice: '',
     quantityOnHand: '',
     categoryId: '',
-    productAverageRating: ''
+    productAverageRating: '',
+    productName: ''
   });
 
   async function handleSubmit(event){
@@ -36,7 +38,8 @@ export default function FormPropsTextFields() {
     productPrice:product.productPrice,
     quantityOnHand: product.quantityOnHand,
     categoryId: product.categoryId,
-    productAverageRating: product.productAverageRating
+    productAverageRating: product.productAverageRating,
+    productName: product.productName
   }
   
   try{
@@ -48,46 +51,58 @@ export default function FormPropsTextFields() {
       productPrice: data.productPrice,
       quantityOnHand: data.quantityOnHand,
       categoryId:data.categoryId,
-      productAverageRating: data.productAverageRating
+      productAverageRating: data.productAverageRating,
+      productName: data.productName
     });
+    return(
+     <Paper> <Grid><TextField>Product was sucessfully added!</TextField></Grid></Paper>
+    )
   }catch(ex){
     console.log('Error in API call', ex.response.data);
-  }
-}
-const onChangeProductDescription = (e) => {
-  setProduct({
-    ...product, productDescription: e.target.value
-  })
-}
-const onChangeProductPrice = (e) => {
-  setProduct({
-    ...product, productPrice: parseFloat(e.target.value)
-  })
-}
-const onChangeQuantityOnHand = (e) => {
-  setProduct({
-    ...product, quantityOnHand: parseInt(e.target.value)
-  })
-}
-const onChangeCategoryId = (e) => {
-  setProduct({
-    ...product, categoryId: parseInt(e.target.value)
-  })
-}
-const onChangeProductAverageRating = (e) => {
-  setProduct({
-    ...product, productAverageRating: parseFloat(e.target.value)
-  })
-}
+  }}
+    const onChangeProductDescription = (e) => {
+      setProduct({
+        ...product, productDescription: e.target.value
+      })
+    }
+    const onChangeProductPrice = (e) => {
+      setProduct({
+        ...product, productPrice: parseFloat(e.target.value)
+      })
+    }
+    const onChangeQuantityOnHand = (e) => {
+      setProduct({
+        ...product, quantityOnHand: parseInt(e.target.value)
+      })
+    }
+    const onChangeCategoryId = (e) => {
+      setProduct({
+        ...product, categoryId: parseInt(e.target.value)
+      })
+    }
+    const onChangeProductAverageRating = (e) => {
+      setProduct({
+        ...product, productAverageRating: parseFloat(e.target.value)
+      })
+    }
+    const onChangeProductName = (e) => {
+      setProduct({
+        ...product, productName: e.target.value
+      })
 
-
-
+    }
   return (
     <form className={classes.root} noValidate onSubmit={handleSubmit}>
       <div>
         <Paper>
-       <Grid> <TextField required id="standard-required"
+        <Grid> <TextField required id="standard-required"
       label="Product Name" 
+      defaultValue="" 
+      value={product.productName} 
+      onChange={onChangeProductName}/>
+      </Grid>
+       <Grid> <TextField required id="standard-required"
+      label="Product Description" 
       defaultValue="" 
       value={product.productDescription} 
       onChange={onChangeProductDescription}/>

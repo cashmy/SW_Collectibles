@@ -20,6 +20,7 @@ import shoppingCart from "../components/ShoppingCart/shoppingCart"
 import Paper from '@material-ui/core/Paper';
 import BackgroundImage from '../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
 import addCategory from '../components/AddCategory/AddCategory'
+import CategoryList from '../components/Category/CategoryList'
 
 const styles = {
   paperContainer: {
@@ -70,6 +71,7 @@ class App extends Component {
             <Route exact={true} path="/addProducts" component={addProducts}/>
             <Route exact={true} path="/shoppingCart" component={shoppingCart} />
             <Route exact ={true} path="/addCategory" component={addCategory}/>
+            <Route exact ={true} path="/categoryList" component={CategoryList}/>
             <SignInSide />
           </Switch>
           <Footer />

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -67,7 +65,7 @@ function OrderDetails(){
           
         <div><center style={{marginTop: "2rem"}}>Order Number: Date Purchased</center></div>
         <Grid container spacing={2} className={classes.grid} >
-          {/* <Paper className={classes.paper} > */}
+          <Paper className={classes.paper} >
           <Grid item xs={2} style={{marginBottom: "2rem"}}>
             Address Line 1 & address line 2
           </Grid>
@@ -109,7 +107,7 @@ function OrderDetails(){
                        </TableBody>
                 </Table>
             </TableContainer>
-        {/* </Paper> */}
+        </Paper>
     </Grid>
                 
         </div>
