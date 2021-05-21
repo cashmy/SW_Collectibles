@@ -17,6 +17,7 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import ServiceLayer from '../../Services/serviceLayer'
 import { Button } from '@material-ui/core';
+import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,36 +38,60 @@ const useStyles = makeStyles((theme) => ({
 
 function ListProducts() {
   const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
 
-const addToCart = (product, i) => {
-  let cart = []
-  if (i ==0){
-  cart.push(product);
+  const addToCart = (product, i) => {
+    let cart = []
+    if (i ==0){
+    cart.push(product);
+    }
+    console.log(cart);
+    return cart;
   }
-  console.log(cart);
-  return cart;
-}
 
-const history = useHistory();
+  const history = useHistory();
 
-const viewProduct = (product) => {
+  const viewProduct = (product) => {
 
-  history.push(`productDetails/${product}`);
-}
-
-useEffect(() => {
-  getProducts();
-},[])
-
-async function getProducts(e){
-  try{
-      const response = await ServiceLayer.getAllProducts();
-      setProducts(response.data);
+    history.push(`productDetails/${product}`);
   }
-  catch(e){
-      console.log('API call unsuccessful', e)
+
+  useEffect(() => {
+    getProducts();
+    getCategories();
+  },[])
+
+  async function getProducts(e){
+    try{
+        const response = await ServiceLayer.getAllProducts();
+        setProducts(response.data);
+    }
+    catch(e){
+        console.log('API call unsuccessful', e)
+    }
   }
-}
+  async function getCategories(e){
+    try{
+        const response = await ServiceLayer.getCategories();
+        setCategories(response.data);
+    }
+    catch(e){
+        console.log('API call unsuccessful', e)
+    }
+  }
+  handleInput = (event) => {
+    setState({search:event.target.value});
+    const filteredProducts = getAllProducts.filter(element => {
+      if(event.target.value === ""){
+        getAllProducts();
+        return element
+      }
+      return element.productName.includes(search)
+    })
+  setState({
+    products: filteredProducts
+  })
+  }
 
   const classes = useStyles();
 
@@ -94,6 +119,13 @@ async function getProducts(e){
               > Add New Products</Controls.Button>
               </Link>
               </Grid>
+              <Paper><Grid> 
+                <TextField required id="standard"
+                label="Search By Name" 
+                defaultValue="" 
+                onChange={handleInput}
+                 />
+                </Grid></Paper>
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>
@@ -105,6 +137,7 @@ async function getProducts(e){
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="right">Rating</TableCell>
                         <TableCell align="right">Quantity</TableCell>
+                        <TableCell align="right">Category</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
                     </TableHead>
@@ -116,6 +149,7 @@ async function getProducts(e){
                         <TableCell align="right">{product.productPrice}</TableCell>
                         <TableCell align="right">{product.productAverageRating}</TableCell>
                         <TableCell align="right">{product.quantityOnHand}</TableCell>
+                        <TableCell align="right">{product.categoryId}</TableCell>
                         <TableCell align="right">
                           <Controls.Button
                             onClick={() => addToCart(product, i)}

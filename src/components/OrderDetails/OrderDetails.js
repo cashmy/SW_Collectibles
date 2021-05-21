@@ -67,7 +67,7 @@ function OrderDetails(){
           
         <div><center style={{marginTop: "2rem"}}>Order Number: Date Purchased</center></div>
         <Grid container spacing={2} className={classes.grid} >
-          {/* <Paper className={classes.paper} > */}
+          <Paper className={classes.paper} >
           <Grid item xs={2} style={{marginBottom: "2rem"}}>
             Address Line 1 & address line 2
           </Grid>
@@ -109,7 +109,7 @@ function OrderDetails(){
                        </TableBody>
                 </Table>
             </TableContainer>
-        {/* </Paper> */}
+        </Paper>
     </Grid>
                 
         </div>

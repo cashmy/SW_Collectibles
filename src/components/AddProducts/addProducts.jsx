@@ -53,6 +53,9 @@ export default function FormPropsTextFields() {
       productAverageRating: data.productAverageRating,
       productName: data.productName
     });
+    return(
+     <Paper> <Grid><TextField>Product was sucessfully added!</TextField></Grid></Paper>
+    )
   }catch(ex){
     console.log('Error in API call', ex.response.data);
   }}
