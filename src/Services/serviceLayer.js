@@ -73,9 +73,14 @@ class ServiceLayer {
         return axios.put(`https://localhost:44394/api/ProductReview/${productId}/review`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    createReview(data){
+    addRating(id, productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.post('https://localhost:44394/api/ProductReview/create', data, {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.post(`https://localhost:44394/api/ProductReview/rating/${id}/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}})
+    }
+
+    addReview(id, productId, data){
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/ProductReview/review/${id}/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     deleteReview(productId){

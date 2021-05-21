@@ -40,6 +40,12 @@ input[type='radio'] {
     display: none;
 }
 
+.review__input {
+    border: 1px solid black;
+    margin: 7px;
+    width: 30rem;
+}
+
 
 
 #Reviews {
