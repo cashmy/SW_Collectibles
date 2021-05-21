@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -22,6 +22,7 @@ import CategoryIcon from '@material-ui/icons/Category';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
+import ServiceLayer from '../../Services/serviceLayer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -97,6 +98,26 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [cartCount, setCartCount] = React.useState(0);
+  const [mailCount, setMailCount] = React.useState(0);
+  const [notificationCount, setNoficatonCount] = React.useState(0);
+
+  useEffect(() => {
+    getCartItems()
+    // getmailCount here
+    // getNotificationCount here
+  },[])
+
+  async function getCartItems(e){
+    try{
+        const response = await ServiceLayer.getItemCount();
+        console.log(response.data[0].count);
+        setCartCount(response.data[0].count);
+    }
+    catch(e){
+        console.log('GetCartItems API call unsuccessful', e)
+    }
+  }
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -117,6 +138,7 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -164,7 +186,7 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <Link component={RouterLink} to={'shoppingCart'}>
           <IconButton aria-label="show 5 cart items" color="inherit">
-            <Badge badgeContent={5} color="secondary">
+            <Badge badgeContent={cartCount} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
@@ -172,8 +194,8 @@ export default function PrimarySearchAppBar() {
         </Link>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <IconButton aria-label="show new mails" color="inherit">
+          <Badge badgeContent={mailCount} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -181,7 +203,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+          <Badge badgeContent={notificationCount} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -268,28 +290,28 @@ export default function PrimarySearchAppBar() {
 
           {/* Icons with Badges */}
             <Link component={RouterLink} to={'shoppingCart'} className={classes.navlink}>
-              <IconButton aria-label="show 5 cart items" color="inherit">
-                <Badge badgeContent={5} color="secondary">
+              <IconButton aria-label="show cart items" color="inherit">
+                <Badge badgeContent={cartCount} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
             </Link>
             
             <Link component={RouterLink} to={'checkOut'} className={classes.navlink}>
-              <IconButton aria-label="show 5 cart items" color="inherit">
+              <IconButton aria-label="goto checkout" color="inherit">
 
                   <CheckCircleOutlineIcon />
   
               </IconButton>
             </Link>
 
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+            <IconButton aria-label="show new mails" color="inherit">
+              <Badge badgeContent={mailCount} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={notificationCount} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
