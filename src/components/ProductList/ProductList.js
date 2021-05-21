@@ -8,7 +8,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
 import ListIcon from '@material-ui/icons/List';
@@ -18,6 +17,7 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import ServiceLayer from '../../Services/serviceLayer';
 import jwtDecode from 'jwt-decode';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +44,7 @@ function ListProducts() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const classes = useStyles();
+  const [searching, setSearching]= useState([])
 
   async function addToCart(product){
     
@@ -71,6 +72,7 @@ function ListProducts() {
   },[])
 
 async function getProducts(e){
+
     try{
         const response = await ServiceLayer.getAllProducts();
         setProducts(response.data);
@@ -79,6 +81,7 @@ async function getProducts(e){
         console.log('API call unsuccessful', e)
     }
   }
+
 
   async function getCategories(e){
     try{
@@ -89,20 +92,59 @@ async function getProducts(e){
         console.log('API call unsuccessful', e)
     }
   }
+   const mapProducts = () => {
+        return (
+          products.map((p, i) => (
+          <TableRow key={i}>
+                        <TableCell align="right">{p.productName}</TableCell>
+                        <TableCell align="right">{p.productDescription}</TableCell>
+                        <TableCell align="right">{p.productPrice}</TableCell>
+                        <TableCell align="right">{p.productAverageRating}</TableCell>
+                        <TableCell align="right">{p.quantityOnHand}</TableCell>
+                        <TableCell align="right">{p.categoryId}</TableCell>
+                        <TableCell align="right">
+                          <Controls.Button
+                            onClick={() => addToCart(p)}
+                            color="primary.light" 
+                            text="Add To Cart"
+                            startIcon={<AddCircleOutlineIcon />}
+                          >
+                          </Controls.Button>
+                          <Controls.Button 
+                                aria-label="product list"
+                                color="primary.light" 
+                                text="View Product Details"
+                                startIcon={<AddCircleOutlineIcon />}
+                                onClick={() => viewProduct(p.productId)}
+                              > </Controls.Button>
+                        </TableCell>
+                        </TableRow>
+        ))
+    
+        )} 
 
   const handleInput = (event) => {
-    setProducts({search:event.target.value});
-    const filteredProducts = getProducts.filter(element => {
+
+   let targetValue = event.target.value;
+    console.log(event.target.value)
+    
+    const filteredProducts = products.filter(element => {
+      debugger;
       if(event.target.value === ""){
         getProducts();
+        element = products;
         return element
       }
-      return element.productName.includes(products.search)
+    
+      else if (element.productName.includes(targetValue)){
+        console.log(element)  
+        return element
+      };
     })
-    setProducts({
-      products: filteredProducts
-    })
+    console.log(filteredProducts)
+    setProducts(filteredProducts)
   }
+  
 
 
   return (
@@ -152,32 +194,7 @@ async function getProducts(e){
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {products.map((product, i) => (
-                        <TableRow key={i}>
-                        <TableCell align="right">{product.productName}</TableCell>
-                        <TableCell align="right">{product.productDescription}</TableCell>
-                        <TableCell align="right">{product.productPrice}</TableCell>
-                        <TableCell align="right">{product.productAverageRating}</TableCell>
-                        <TableCell align="right">{product.quantityOnHand}</TableCell>
-                        <TableCell align="right">{product.categoryId}</TableCell>
-                        <TableCell align="right">
-                          <Controls.Button
-                            onClick={() => addToCart(product)}
-                            color="primary.light" 
-                            text="Add To Cart"
-                            startIcon={<AddCircleOutlineIcon />}
-                          >
-                          </Controls.Button>
-                          <Controls.Button 
-                                aria-label="product list"
-                                color="primary.light" 
-                                text="View Product Details"
-                                startIcon={<AddCircleOutlineIcon />}
-                                onClick={() => viewProduct(product.productId)}
-                              > </Controls.Button>
-                        </TableCell>
-                        </TableRow>
-                    ))}
+                    {mapProducts(products)}
                     </TableBody>
                 </Table>
             </TableContainer>
