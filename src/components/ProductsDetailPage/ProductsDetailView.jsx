@@ -6,11 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import ServiceLayer from '../../Services/serviceLayer';
 import { Button } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
-
+import StarIcon from '@material-ui/icons/Star';
 
 function ProductsDetailView(props) {
     const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [rating, setRating ] = useState(null);
+    const [hover, setHover] = useState(null);
 
     let url = props.location.pathname;
     let urlSplit = url.split("/");
@@ -36,6 +38,15 @@ function ProductsDetailView(props) {
             const response = await ServiceLayer.getReviewByProductId(id);
             setReviews(response.data);
         }catch(e){
+            console.log('API call unsuccessful', e)
+        }
+    }
+
+    async function addRating(id){
+        try{
+
+        }
+        catch(e){
             console.log('API call unsuccessful', e)
         }
     }
@@ -77,7 +88,32 @@ function ProductsDetailView(props) {
             ))
 
         )
+    }
 
+    const starRating = () => {
+        
+        return (
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                {[...Array(5)].map((star, i) => {
+                    const ratingValue = i + 1;
+
+                    return (
+                            <div key={i}>
+                                <label>
+                                    <input  type='radio' name='rating' value={ratingValue} onClick={()=>setRating(ratingValue)} />
+                                    <StarIcon className='star' 
+                                    fontSize='large' 
+                                    color={ratingValue <= (hover || rating) ? 'primary' : 'secondary'} 
+                                    onMouseEnter={()=>setHover(ratingValue)} 
+                                    onMouseLeave={()=>setHover(null)}
+                                    
+                                    />
+                                </label>
+                            </div>
+                );
+                })}
+            </div>
+        )
     }
 
     return (
@@ -86,9 +122,11 @@ function ProductsDetailView(props) {
         <Grid container direction="row" spacing={5} style={{marginTop: "2rem"}}></Grid>
             <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
                 <Grid container item xs={4} spacing={3} className="grid" direction='column' alignItems="center" justify="center">
-                    <div >
+                    <div >    
                         <img src="https://i5.walmartimages.com/asr/49edcb9d-ea4b-48bc-b181-5844578528c1_1.e5e95a3e011bab74d0df2d9dae924a86.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff" alt="Collectible Item" className="product__img"/>
+                        {starRating()}
                     </div>
+                    
                 
                 </Grid>
                 <Grid container item xs={4} spacing={3} justify="center" alignItems="center" className="grid" id="midProductDetailGrid">
