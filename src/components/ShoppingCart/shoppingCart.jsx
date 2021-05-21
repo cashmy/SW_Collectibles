@@ -102,7 +102,7 @@ export default function BasicTable() {
                     <TableBody>
                         {cartItems.map((items, i) => (
                         <TableRow key={i}>
-                            <TableCell component="th" scope="row">{items.ProductId}</TableCell>
+                            <TableCell component="th" scope="row">{items.productId}</TableCell>
                             <TableCell align="right">50$</TableCell>
                                 <TableCell align="right">
                                 <ButtonGroup size="small" aria-label="small outlined button group">
@@ -115,7 +115,7 @@ export default function BasicTable() {
                                 </ButtonGroup>
                         </TableCell>
                         <TableCell align="right">                       
-                        <button onClick={() => deleteCart(items.ProductId)}> Remove </button> </TableCell>
+                        <button onClick={() => deleteCart(items.productId)}> Remove </button> </TableCell>
 
  
                         </TableRow>
