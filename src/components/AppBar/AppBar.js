@@ -18,6 +18,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HistoryIcon from '@material-ui/icons/History';
 import ListIcon from '@material-ui/icons/List';
+import CategoryIcon from '@material-ui/icons/Category';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
@@ -251,6 +252,17 @@ export default function PrimarySearchAppBar() {
                 color="primary.light" 
                 text="Orders" 
                 startIcon={<HistoryIcon 
+              />}>Orders</Controls.Button>
+            </Link>
+                    
+                    
+          {/* SELLER: Conditional Links */}
+          <Link component={RouterLink} to={'categoryList'}  >
+              <Controls.Button 
+                aria-label="category list" 
+                color="default" 
+                text="Categoryies" 
+                startIcon={<CategoryIcon 
               />}>Orders</Controls.Button>
             </Link>
 

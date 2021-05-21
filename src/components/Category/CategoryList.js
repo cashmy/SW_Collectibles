@@ -10,9 +10,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
-import ListIcon from '@material-ui/icons/List';
+import CategoryIcon from '@material-ui/icons/Category';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
-import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
@@ -93,7 +94,7 @@ async function getCategories(e){
       <PageHeader 
         title="Category List"
         subtitle="Complete list of all category groupings for products."
-        icon={<ListIcon/>}
+        icon={<CategoryIcon/>}
       />    
       <Paper className={classes.paper} >
           {/* <Paper className={classes.paper} > */}
@@ -123,13 +124,13 @@ async function getCategories(e){
 
                         <TableCell align="right">{category.categoryDescription}</TableCell>
                         <TableCell align="right">
-                          <Controls.Button 
-                                aria-label="product list"
-                                color="primary.light" 
-                                text="Edit"
-                                startIcon={<AddIcon />}
-                                onClick={() => editCategory(category.categoryId)}
-                              > </Controls.Button>
+                          <IconButton
+                            onClick={() => editCategory(category.categoryId)}
+                            aria-label="edit category"
+                            color="primary.light"
+                            >
+                            <EditIcon />
+                          </IconButton>
                         </TableCell>
                         </TableRow>
                     ))}
