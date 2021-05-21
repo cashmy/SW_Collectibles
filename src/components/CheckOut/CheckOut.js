@@ -11,9 +11,6 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    position: 'relative',
-  },
   layout: {
     width: 'auto',
     marginLeft: theme.spacing(2),
