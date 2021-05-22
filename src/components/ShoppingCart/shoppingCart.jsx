@@ -18,6 +18,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import ServiceLayer from '../../Services/serviceLayer'
 import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import jwtDecode from 'jwt-decode';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,10 +54,13 @@ const useStyles = makeStyles((theme) => ({
 //product['countInStock']   line 75  you would replate the number 5 with the products quantity that exist being sold on the website from the seller.gi
 
 export default function BasicTable() {
+  const jwt = localStorage.getItem('token');
   const classes = useStyles();
   const history = useHistory();
-  const [counter, setCounter] = useState(0);
+
   const [cartItems, setCartItems] = useState([])
+  const [userId, setUserId] = useState("");
+  const [useEffectTrigger, setUseEffectTrigger] = useState(false)
 
   // ** cartItems from database are:
   // cartItem.userId
@@ -68,10 +72,23 @@ export default function BasicTable() {
   // cartItem.extPrice 
 
   useEffect(() => {
-    getCart();
-  },[])
+    if(jwt) {
+      const user = jwtDecode(jwt);
+      setUserId (user.id) ;
+      getCart();
+    }
+    },[jwt]
+    )
 
-  async function getCart(e){
+  useEffect(() => { 
+    if (useEffectTrigger === true)
+    {
+      setUseEffectTrigger(false) ;
+      getCart()
+    }
+  },[useEffectTrigger])
+
+  async function getCart(){
     try{
         const response = await ServiceLayer.getUserCart();
         setCartItems(response.data);
@@ -96,19 +113,38 @@ export default function BasicTable() {
       history.push(`productDetails/${productId}`);
   }
 
-  function handleCountInc(index, quantity) {
-    setCounter(counter+1)
-    console.log("Current status +: " +  index + ", " + quantity + ", " + counter + ", " + cartItems)
-    // setCartItems(...cartItems,
-    //   cartItems[index].quantity = quantity + 1)
+  async function updateCart(productId, body){
+    try{
+        const response = await ServiceLayer.editCart(productId, body);
+        console.log(response.data)
+    }
+    catch(e){
+        console.log("Get User's Shopping Cart API call unsuccessful", e)
+    }
   }
 
-  function handleCountDec(index, quantity){
-    setCounter(counter - 1)
-    console.log("Current status -: " +  index + ", " + quantity + ", " + counter + ", " + cartItems)
-    // setCartItems(...cartItems,
-    //   cartItems[index].quantity = quantity - 1)
+  function handleCount(action, productId, quantity) {
+    let newQuantity = 0;
+    if (action === "add")
+    {
+      newQuantity = quantity + 1
+    } else {
+      newQuantity = quantity - 1
+    }
+    let newProduct = {
+      'UserId' : userId,
+      'ProductId' : productId, 
+      'Quantity' : newQuantity,
+    }
+    updateCart(productId, newProduct)
+    setUseEffectTrigger(true)
   }
+
+
+  // function handleCountDec(index, productId, quantity){
+  //   setCounter(counter - 1)
+
+  // }
 
   return (
       <div div className={classes.layout}>
@@ -137,10 +173,10 @@ export default function BasicTable() {
                           <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartItem.extPrice)}</TableCell>
                           <TableCell align="right">
                               <ButtonGroup size="small" aria-label="small outlined button group">
-                                   <Button disabled={counter >= 50 } onClick={()=> {handleCountInc(i,cartItem.quantity)} }
+                                   <Button disabled={cartItem.quantity >= 50 } onClick={()=> {handleCount("add",cartItem.productId, cartItem.quantity)} }
                                    > + </Button>
-                                  {<Button disabled>{cartItem.quantity} - {counter} </Button>}
-                                  {<Button disabled={counter <= 1} onClick={() => {handleCountDec(i,cartItem.quantity)} } 
+                                  {<Button disabled>{cartItem.quantity} </Button>}
+                                  {<Button disabled={cartItem.quantity <= 1} onClick={() => {handleCount("del", cartItem.productId, cartItem.quantity)} } 
                                   > - </Button>}
                               </ButtonGroup>
                           </TableCell>
@@ -168,3 +204,4 @@ export default function BasicTable() {
     </div>
   );
 }
+
