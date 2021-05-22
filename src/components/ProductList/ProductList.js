@@ -42,38 +42,49 @@ const useStyles = makeStyles((theme) => ({
 
 function ListProducts() {
   const jwt = localStorage.getItem('token');
-  const user = jwtDecode(jwt);
-  const userId = user.id;
   
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const classes = useStyles();
   const [searching, setSearching]= useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
-
+  const [sellerTitleDisabled, setSellerTitleDisabled] = useState(true);
+  const [buyerTitleDisabled, setBuyerTitleDisabled] = useState(true);
+  const [userId, setUserId] = useState("");
+  
   async function addToCart(product){
     
     const data = {
-        userId: userId,
+      userId: userId,
         productId: product.productId,
         quantity: 1
     }
     try{    
-        const response = await ServiceLayer.addToCart(product.productId, data);
-        console.log(response.status);
+      const response = await ServiceLayer.addToCart(product.productId, data);
+      console.log(response.status);
     }catch(e){
-        console.log('API call unsuccessful', e.response.data);
+      console.log('API call unsuccessful', e.response.data);
     }
 }
   const history = useHistory();
-
+  
   const viewProduct = (product) => {
     history.push(`productDetails/${product}`);
   }
 
   useEffect(() => {
-    getProducts();
-    getCategories();
+    if(jwt) {
+      const user = jwtDecode(jwt);
+      setUserId (user.id) ;
+      getProducts();
+      getCategories();
+      if (user.isSupplier == "True") {
+        setSellerTitleDisabled(false);
+      } else {
+
+        setBuyerTitleDisabled(false);
+      }
+    }
   },[])
 
 async function getProducts(){
@@ -187,14 +198,15 @@ const matchCategories = (product) => {
         subtitle="Complete list of all available products for sale."
         icon={<ListIcon/>}
       />    
-      <Grid container spacing={2} className={classes.grid}> <Link component={RouterLink} to={'addProducts'}  >
+      <Grid container spacing={2} className={classes.grid}>
+      {sellerTitleDisabled === false && <Link component={RouterLink} to={'addProducts'}  >
               <Fab 
               className={classes.addButton}
               aria-label = "add"
               color="secondary" 
               text="Add New Products"
               > <AddIcon/></Fab>
-              </Link>
+              </Link>}
 
               </Grid>
               <center><Paper style = {{width:"38%"}}><Grid  className={classes.grid}>
@@ -206,7 +218,7 @@ const matchCategories = (product) => {
                 onChange={handleInputForProduct}
                  />
                 </Grid> </Paper></center>
-      <Grid container spacing={2} className={classes.grid} >
+      <Grid container spacing={1} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">

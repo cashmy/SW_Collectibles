@@ -120,7 +120,7 @@ export default function PrimarySearchAppBar() {
       }
     } else {
       setInitialLogin(true)
-    }
+    }git 
   },[jwt])
 
 
