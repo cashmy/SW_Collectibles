@@ -66,7 +66,7 @@ function OrderDetails(){
   }
 
   function handleCancel() {
-    history.back();
+    history.goBack();
   }
 
     return (
