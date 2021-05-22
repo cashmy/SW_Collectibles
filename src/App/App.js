@@ -64,7 +64,7 @@ class App extends Component {
             <Route path="/review" component={Review} />
             <Route path="/checkOut" component={CheckOut} />
             <Route exact={true} path="/registration" component={RegistrationSide}/> 
-            <Route path="/productDetails" component={ProductsDetailView} />
+            <Route path='/productDetails' component={ProductsDetailView} />
             <Route exact={true} path="/productList" component={ProductList} />
             <Route exact={true} path="/orderDetails" component={OrderDetails}/>
             <Route exact={true} path="/orderList" component={OrderList} />

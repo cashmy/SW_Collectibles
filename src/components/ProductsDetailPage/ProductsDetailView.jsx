@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import "./ProductDetailView.css";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -13,14 +14,12 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 
 function ProductsDetailView(props) {
-    let url = props.location.pathname;
-    let urlSplit = url.split("/");
-    const productId = parseInt(urlSplit[2]);
+    const location = useLocation();
+    const productId = location.state.productId;
 
     const jwt = localStorage.getItem('token');
     const user = jwtDecode(jwt);
     const userId = user.id;
-    console.log(user);
 
     const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -32,8 +31,8 @@ function ProductsDetailView(props) {
         rated: false,
         edited: false
     });
-    const [hover, setHover] = useState(null);
 
+    const [hover, setHover] = useState(null);
 
     useEffect(() => {
         getProduct(productId);
@@ -43,7 +42,6 @@ function ProductsDetailView(props) {
     useEffect(() => {
         // Trigger a re-render on change of reviews
     }, [reviews])
-
 
     async function getProduct(id){
         try{

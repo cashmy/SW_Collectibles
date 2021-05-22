@@ -69,7 +69,12 @@ function ListProducts() {
   const history = useHistory();
   
   const viewProduct = (product) => {
-    history.push(`productDetails/${product}`);
+    let id = product;
+    history.push({
+      pathname: '/productDetails',
+      search: `?query=${product}`,
+      state: {productId: id}
+    })
   }
 
   useEffect(() => {
@@ -124,6 +129,9 @@ const matchCategories = (product) => {
         console.log('API call unsuccessful')
     }
   }
+
+
+
    const mapProducts = () => {
         return (
           products.map((p, i) => (
