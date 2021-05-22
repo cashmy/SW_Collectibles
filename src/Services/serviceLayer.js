@@ -122,9 +122,9 @@ class ServiceLayer {
         return axios.get('https://localhost:44394/api/ShoppingCart/', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    addToCart(data){
+    addToCart(productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.post('https://localhost:44394/api/ShoppingCart/', data, {headers: {Authorization: 'Bearer ' + jwt}})
+        return axios.post(`https://localhost:44394/api/ShoppingCart/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     editCart(productId, data){

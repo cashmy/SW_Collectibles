@@ -16,6 +16,7 @@ import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import ServiceLayer from '../../Services/serviceLayer';
+import jwtDecode from 'jwt-decode';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const jwt = localStorage.getItem('token');
+const user = jwtDecode(jwt);
+const userId = user.id;
+
 function ListProducts() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
@@ -42,12 +47,20 @@ function ListProducts() {
   const [searching, setSearching]= useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
 
-  const addToCart = (product, i) => {
-    let cart = []
-    if (i === 0){
-    cart.push(product);
+  async function addToCart(product){
+    
+    const data = {
+        userId: userId,
+        productId: product.productId,
+        quantity: 1
     }
-  }
+    try{    
+        const response = await ServiceLayer.addToCart(product.productId, data);
+        console.log(response.status);
+    }catch(e){
+        console.log('API call unsuccessful', e.response.data);
+    }
+}
   const history = useHistory();
 
   const viewProduct = (product) => {
@@ -122,7 +135,7 @@ const matchCategories = (product) => {
                         <TableCell align="right">{matchCategories(p)}</TableCell>
                         <TableCell align="right">
                           <Controls.Button
-                            onClick={() => addToCart(products.product, i)}
+                            onClick={() => addToCart(p)}
                             color="primary.light" 
                             text="Add To Cart"
                             startIcon={<AddCircleOutlineIcon />}
