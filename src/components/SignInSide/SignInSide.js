@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from '../../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
 import ServiceLayer from '../../Services/serviceLayer.js';
+import jwtDecode from 'jwt-decode';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,51 +50,54 @@ const useStyles = makeStyles((theme) => ({
 export default function SignInSide() {
   const classes = useStyles();
 
-  const [user, setUser] = useState({
+  const [userLogin, setUserLogin] = useState({
     username: '',
     password: '',
   });
+  const [user, setUser] = useState();
 
   async function handleSubmit(event){
     event.preventDefault();
     const data = {
-      username: user.username,
-      password: user.password
+      username: userLogin.username,
+      password: userLogin.password
     }
     try{
       const response = await ServiceLayer.userLogin(data);
       console.log(response);
-      setUser({
-        username: data.username,
-        password: data.password
-      });
 
       if(response.data.token !== null){
-        let token = response.data.token
+        let token = response.data.token;
         window.localStorage.setItem('token', token)
+        setUserLogin({
+          username: data.username,
+          password: data.password,
+        });
+        const jwt = localStorage.getItem('token');
+        const userInfo = jwtDecode(jwt);
+        setUser(userInfo);
         window.location.href='/productList';
       }
       else{
         console.log('User token is undefined.')
       }
     } catch(ex){
+      console.log('** Ensure your server is running!! **')
       console.log('Error in API call', ex);
       alert("Incorrect Username or Password. Try again.")
     }
 
-    
-
   }
 
   const onChangeUsername = (e) => {
-    setUser({
-      ...user, username: e.target.value
+    setUserLogin({
+      ...userLogin, username: e.target.value
     })
   }
 
   const onChangePassword = (e) => {
-    setUser({
-      ...user, password: e.target.value
+    setUserLogin({
+      ...userLogin, password: e.target.value
     })
   }
 
@@ -118,7 +122,7 @@ export default function SignInSide() {
               id="username"
               label="Username"
               name="username"
-              value={user.username}
+              value={userLogin.username}
               onChange={onChangeUsername}
               autoComplete="username"
               autoFocus
@@ -132,7 +136,7 @@ export default function SignInSide() {
               label="Password"
               type="password"
               id="password"
-              value={user.password}
+              value={userLogin.password}
               onChange={onChangePassword}
               autoComplete="current-password"
             />
