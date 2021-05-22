@@ -11,6 +11,7 @@ import StarIcon from '@material-ui/icons/Star';
 import jwtDecode from 'jwt-decode';
 import PageHeader from '../PageHeader/PageHeader';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 function ProductsDetailView(props) {
@@ -241,9 +242,47 @@ function ProductsDetailView(props) {
         )
     }
 
+    const useStyles = makeStyles((theme) => ({
+        layout: {
+          width: 'auto',
+          marginLeft: theme.spacing(0),
+          marginRight: theme.spacing(2),
+        },
+        paper: {
+          marginLeft: theme.spacing(50),
+          marginRight: theme.spacing(50),
+          marginTop: theme.spacing(1),
+          marginBottom: theme.spacing(8),
+          [theme.breakpoints.down('md')]: {
+            marginLeft: theme.spacing(5),
+            marginRight: theme.spacing(5)
+          },
+          [theme.breakpoints.down('sm')]: {
+            marginLeft: theme.spacing(2),
+            marginRight: theme.spacing(2)
+          },
+          [theme.breakpoints.down('xs')]: {
+            marginLeft: theme.spacing(0),
+            marginRight: theme.spacing(0)
+          },
+        },
+        stepper: {
+          padding: theme.spacing(3, 0, 5),
+        },
+        buttons: {
+          display: 'flex',
+          justifyContent: 'flex-end',
+        },
+        addButton: {
+          marginLeft: theme.spacing(1),
+        },
+      }));
+
+      const classes = useStyles();
+
     return (
-        <div>
-            <div style={{marginBottom: '45px'}}>
+        <div >
+            <div className={classes.paper} style={{marginBottom: '45px'}}>
             <PageHeader 
             title="Product Detail View"
             subtitle="Detailed View Of Product"
@@ -251,7 +290,7 @@ function ProductsDetailView(props) {
       />      
             </div>
 
-        <Paper>
+        <Paper className={classes.paper}>
             <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
                 <Grid container item xs={4} spacing={3} className="grid" direction='column' alignItems="center" justify="center">
                     <div >    
