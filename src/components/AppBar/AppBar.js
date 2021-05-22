@@ -114,7 +114,6 @@ export default function PrimarySearchAppBar() {
       if (user.isSupplier === "True") {
         setSellerTitleDisabled(false);
       } else {
-
         setBuyerTitleDisabled(false);
       }
     } else {

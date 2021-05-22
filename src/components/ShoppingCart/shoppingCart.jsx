@@ -24,6 +24,16 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
       },
+      layout: {
+        width: 'auto',
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up(800 + theme.spacing(2) * 2)]: {
+          width: 800,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        },
+      },
       grid: {
         padding: theme.spacing(2.5),
       },
@@ -88,7 +98,7 @@ export default function BasicTable() {
 
 
   return (
-      <div>
+      <div div className={classes.layout}>
       <PageHeader 
         title="Shopping Cart"
         subtitle="Items you have currently chosen to purchase."
