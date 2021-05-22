@@ -111,7 +111,8 @@ export default function PrimarySearchAppBar() {
       getMailItems();
       getNotificationItems();
       setInitialLogin(false)
-      if (user.isSupplier== "True") {
+      console.log(user);
+      if (user.isSupplier == "True") {
         setSellerTitleDisabled(false);
       } else {
 
@@ -119,7 +120,7 @@ export default function PrimarySearchAppBar() {
       }
     } else {
       setInitialLogin(true)
-    }
+    }git 
   },[jwt])
 
 

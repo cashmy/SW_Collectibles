@@ -76,7 +76,7 @@ export default function SignInSide() {
         const jwt = localStorage.getItem('token');
         const userInfo = jwtDecode(jwt);
         setUser(userInfo);
-        window.location.href='/productList';
+        //window.location.href='/productList';
       }
       else{
         console.log('User token is undefined.')
@@ -86,8 +86,9 @@ export default function SignInSide() {
       console.log('Error in API call', ex);
       alert("Incorrect Username or Password. Try again.")
     }
-
   }
+
+  console.log(user);
 
   const onChangeUsername = (e) => {
     setUserLogin({
