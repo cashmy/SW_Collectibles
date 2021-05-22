@@ -103,7 +103,7 @@ export default function PrimarySearchAppBar() {
   const [notificationCount, setNoficatonCount] = React.useState(0);
 
   useEffect(() => {
-    getCartItems()
+
     // getmailCount here
     // getNotificationCount here
   },[])

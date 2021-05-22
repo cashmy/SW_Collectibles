@@ -218,7 +218,7 @@ const matchCategories = (product) => {
         subtitle="Complete list of all available products for sale."
         icon={<ListIcon/>}
       />    
-      <Grid> <Link component={RouterLink} to={'addProducts'}  >
+      <Grid container spacing={2} className={classes.grid}> <Link component={RouterLink} to={'addProducts'}  >
               <Controls.Button 
                 aria-label="product list" 
                 color="primary.light" 
@@ -235,9 +235,11 @@ const matchCategories = (product) => {
               > Add New Products</Controls.Button>
               </Link>
               </Grid>
-              <Paper><Grid> 
-                <TextField required id="standard"
-                label="Search By Name" 
+              <Paper><Grid container spacing={2} className={classes.grid}> 
+                <TextField
+                 required id="standard"
+                variant="outlined"
+                label="Search By Name or Category" 
                 defaultValue="" 
                 onChange={handleInputForProduct}
                  />
