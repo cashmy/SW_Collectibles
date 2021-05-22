@@ -111,9 +111,6 @@ const matchCategories = (product) => {
  return productCategories
 }
 
-
-  
-
   async function getCategories(){
     try{
         const response = await ServiceLayer.getCategories();
