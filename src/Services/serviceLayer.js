@@ -22,7 +22,6 @@ class ServiceLayer {
     }
 
     userLogin(data){
-        this.getToken()
         return axios.post('https://localhost:44394/api/authentication/login', data);
     }
 

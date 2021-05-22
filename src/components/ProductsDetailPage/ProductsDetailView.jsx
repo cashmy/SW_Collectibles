@@ -13,7 +13,6 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 
 function ProductsDetailView(props) {
-
     let url = props.location.pathname;
     let urlSplit = url.split("/");
     const productId = parseInt(urlSplit[2]);
@@ -21,6 +20,7 @@ function ProductsDetailView(props) {
     const jwt = localStorage.getItem('token');
     const user = jwtDecode(jwt);
     const userId = user.id;
+    console.log(user);
 
     const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
