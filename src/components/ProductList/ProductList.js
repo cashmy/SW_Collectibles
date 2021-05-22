@@ -171,6 +171,7 @@ const matchCategories = (product) => {
 
     })
     setProducts(filteredProducts)
+    console.log(filteredProducts)
   }
 
   // const handleInputForCategories = (event) => {
@@ -204,10 +205,11 @@ const matchCategories = (product) => {
         subtitle="Complete list of all available products for sale."
         icon={<ListIcon/>}
       />    
-      <Grid> <Link component={RouterLink} to={'addProducts'}  >
+      <Grid container spacing={2} className={classes.grid}> <Link component={RouterLink} to={'addProducts'}  >
               <Controls.Button 
                 aria-label="product list" 
                 color="primary.light" 
+                display = "flex"
                 text="Add New Products"
                 startIcon={<AddCircleOutlineIcon />}
               > Add New Products</Controls.Button>
@@ -221,14 +223,15 @@ const matchCategories = (product) => {
               > Add New Products</Controls.Button>
               </Link>
               </Grid>
-              <Paper><Grid> 
-                <TextField required id="standard"
+              <center><Paper style = {{width:"38%"}}><Grid  className={classes.grid}>
+                <TextField
+                id= "filled-size-small"
                 variant="outlined"
-                label="Search By Name" 
+                label="Search Name or Category" 
                 defaultValue="" 
                 onChange={handleInputForProduct}
                  />
-                </Grid></Paper>
+                </Grid> </Paper></center>
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>
