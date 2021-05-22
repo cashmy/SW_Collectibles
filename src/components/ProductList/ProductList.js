@@ -157,18 +157,27 @@ const matchCategories = (product) => {
 
   const handleInputForProduct = (event) => {
 
-   let targetValue = event.target.value;
+    let targetValue = event.target.value;
     console.log(event.target.value)
-    let categoryNames = [];
-    categories.forEach(category => {categoryNames.push(category.categoryDescription)} )
+
+
     const filteredProducts = products.filter(element => {
+      console.log(element);
+      let categoryName = [];
+      categories.forEach(category => {
+        console.log(category);
+        if(category.categoryId === element.categoryId){
+          categoryName = category.categoryDescription;
+        }
+      })
+
+
       if(event.target.value === ""){
         getProducts();
-        element = products;
-        return element
+        return products;
       }
     
-      else if (element.productName.includes(targetValue)){
+      else if (element.productName.includes(targetValue) || categoryName.includes(targetValue)){
         console.log(element)  
         return element
       };
