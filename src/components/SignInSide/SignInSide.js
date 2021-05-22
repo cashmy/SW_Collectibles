@@ -88,8 +88,6 @@ export default function SignInSide() {
     }
   }
 
-  console.log(user);
-
   const onChangeUsername = (e) => {
     setUserLogin({
       ...userLogin, username: e.target.value

@@ -41,7 +41,7 @@ function ProductsDetailView(props) {
     }, [])
 
     useEffect(() => {
-
+        // Trigger a re-render on change of reviews
     }, [reviews])
 
 
