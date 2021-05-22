@@ -21,6 +21,9 @@ function ProductsDetailView(props) {
     const jwt = localStorage.getItem('token');
     const user = jwtDecode(jwt);
     const userId = user.id;
+    const userName = user.username;
+    console.log(user);
+    console.log(user.username)
 
     const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -193,7 +196,39 @@ function ProductsDetailView(props) {
             reviews.map((review, i) => (
                 <div key={i} className="product__reviews">
                     <Typography noWrap>
-                    <span><span>Review: </span>{review.reviewText}&nbsp;&nbsp;<span>  Rating: {review.reviewRating} out of 5</span></span>
+                    <div style={{display: 'flex'}}>
+                        <span>{userName}:</span>
+                        <span style={{marginLeft: '10px'}}>{review.reviewText}</span> 
+                            
+                    <div style={{display: 'flex', marginLeft: '10px'}} >        
+                            {[...Array(5)].map((star, i) => {
+                            const ratingValue = i + 1;
+
+                            return (
+                            <div key={i}>
+                                {ratingValue <= review.reviewRating ? 
+                                    <span>
+                                        <StarIcon
+                                        style={{fill:'#F7C631'}}
+                                        fontSize='small' 
+                                        />
+                                    </span>
+                                :  
+                                    <span>
+                                        <StarIcon
+                                        style={{fill:'#A5A8AC'}}
+                                        fontSize='small' 
+                                        />
+                                    </span>
+                                
+                                }
+
+                            </div>
+                                );
+                                })}
+                      </div>
+                      
+                      </div>
                     </Typography>
                 </div>
             ))
@@ -207,7 +242,6 @@ function ProductsDetailView(props) {
             <div style={{display: 'flex', justifyContent: 'center', marginTop:'3px'}}>
                 {[...Array(5)].map((star, i) => {
                     const ratingValue = i + 1;
-
                     return (
                             <div key={i}>
                                 <label>
@@ -219,7 +253,6 @@ function ProductsDetailView(props) {
                                     style={{fill: '#F7C631'}}
                                     onMouseEnter={()=>setHover(ratingValue)} 
                                     onMouseLeave={()=>setHover(null)}
-                                    
                                     />
                                     </>
                                     :
@@ -249,8 +282,8 @@ function ProductsDetailView(props) {
           marginRight: theme.spacing(2),
         },
         paper: {
-          marginLeft: theme.spacing(50),
-          marginRight: theme.spacing(50),
+          marginLeft: theme.spacing(40),
+          marginRight: theme.spacing(40),
           marginTop: theme.spacing(1),
           marginBottom: theme.spacing(8),
           [theme.breakpoints.down('md')]: {
@@ -308,7 +341,7 @@ function ProductsDetailView(props) {
                 </Grid>
             </Grid>
         <Grid container direction="row" spacing={1} style={{margin: "2rem"}}>
-            <div>
+            <div style={{width: '100%', justifyContent: 'start'}}>
                 {!userReview.rated && !userReview.edited ? <Button variant='contained' color="primary" onClick={()=>setUserReview({...userReview, rated: true})}>Add A Review</Button> 
                 : <></>  }
                 {userReview.edited && !userReview.rated ? <Button variant='contained' color="primary" onClick={()=>setUserReview({...userReview, rated: true,})}>Edit Review</Button> 
