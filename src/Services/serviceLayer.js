@@ -37,8 +37,7 @@ class ServiceLayer {
     //Request for Products
 
     getAllProducts(){
-        const jwt = localStorage.getItem('token')
-        return axios.get('https://localhost:44394/api/Products', {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.get('https://localhost:44394/api/Products');
     }
 
     getProductById(productId){
