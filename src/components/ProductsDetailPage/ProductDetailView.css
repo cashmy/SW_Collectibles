@@ -43,3 +43,14 @@ input[type='radio'] {
 #Reviews {
     margin: 5rem;
 }
+
+.main__paper{
+    margin-left: 5;
+}
+
+@media only screen and (min-width: 1050px) {
+    #main__paper {
+        margin-left: 10;
+        margin-right: 10;
+    }
+}
