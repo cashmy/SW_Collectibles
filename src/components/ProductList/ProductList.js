@@ -85,20 +85,6 @@ async function getProducts(){
     }
   }
 
-  // async function getCategoryId(id){
-  //   debugger;
-  //   let chosenCategory;
-  //   try{
-  //     const response = await ServiceLayer.getCategoryById(id);
-  //     console.log(response.data);
-  //     setSelectedCategory(response.data);
-
-  //   }
-  //   catch{
-  //   console.log('API call unsucessful', chosenCategory)
-  //   }
-  // }
-
 const matchCategories = (product) => {
 
   let productCategories;
