@@ -18,6 +18,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import ServiceLayer from '../../Services/serviceLayer';
 import jwtDecode from 'jwt-decode';
 import TextField from '@material-ui/core/TextField';
+import { Category } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -160,6 +161,8 @@ const matchCategories = (product) => {
     console.log(event.target.value)
     
     const filteredProducts = products.filter(element => {
+     let chosenCategory = categories;
+     console.log(chosenCategory)
       if(event.target.value === ""){
         getProducts();
         element = products;
@@ -172,7 +175,6 @@ const matchCategories = (product) => {
       };
 
     })
-    console.log(filteredProducts)
     setProducts(filteredProducts)
   }
 
