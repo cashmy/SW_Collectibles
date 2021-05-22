@@ -71,11 +71,11 @@ function OrderDetails(){
 
     return (
         <div className={classes.layout}>
-                  <PageHeader 
-        title="Order Information"
-        subtitle="All information for the specific order you selected."
-        icon={<HistoryIcon/>}
-      /> 
+          <PageHeader 
+            title="Order Information"
+            subtitle="All information for the specific order you selected."
+            icon={<HistoryIcon/>}
+          /> 
           
         <Grid container spacing={2} className={classes.grid} >
           <Paper className={classes.paper} >
@@ -129,7 +129,7 @@ function OrderDetails(){
                 </Table>
             </TableContainer>
             <Controls.Button
-              color='primary'
+              color='default'
               text='Cancel'
               onClick={handleCancel}
             />
