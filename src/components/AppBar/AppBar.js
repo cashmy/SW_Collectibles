@@ -111,7 +111,7 @@ export default function PrimarySearchAppBar() {
       getMailItems();
       getNotificationItems();
       setInitialLogin(false)
-      if (user.isSupplier) {
+      if (user.isSupplier== "True") {
         setSellerTitleDisabled(false);
       } else {
 

@@ -78,7 +78,7 @@ function ListProducts() {
       setUserId (user.id) ;
       getProducts();
       getCategories();
-      if (user.isSeller) {
+      if (user.isSupplier == "True") {
         setSellerTitleDisabled(false);
       } else {
 
@@ -218,7 +218,7 @@ const matchCategories = (product) => {
                 onChange={handleInputForProduct}
                  />
                 </Grid> </Paper></center>
-      <Grid container spacing={2} className={classes.grid} >
+      <Grid container spacing={1} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
