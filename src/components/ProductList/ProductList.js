@@ -37,11 +37,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const jwt = localStorage.getItem('token');
-const user = jwtDecode(jwt);
-const userId = user.id;
 
 function ListProducts() {
+  const jwt = localStorage.getItem('token');
+  const user = jwtDecode(jwt);
+  const userId = user.id;
+  
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const classes = useStyles();
@@ -128,29 +129,29 @@ const matchCategories = (product) => {
         return (
           products.map((p, i) => (
           <TableRow key={i}>
-                        <TableCell align="right">{p.productName}</TableCell>
-                        <TableCell align="right">{p.productDescription}</TableCell>
-                        <TableCell align="right">{p.productPrice}</TableCell>
-                        <TableCell align="right">{p.productAverageRating}</TableCell>
-                        <TableCell align="right">{p.quantityOnHand}</TableCell>
-                        <TableCell align="right">{matchCategories(p)}</TableCell>
-                        <TableCell align="right">
-                          <Controls.Button
-                            onClick={() => addToCart(p)}
-                            color="primary.light" 
-                            text="Add To Cart"
-                            startIcon={<AddCircleOutlineIcon />}
-                          >
-                          </Controls.Button>
-                          <Controls.Button 
-                                aria-label="product list"
-                                color="primary.light" 
-                                text="View Product Details"
-                                startIcon={<AddCircleOutlineIcon />}
-                                onClick={() => viewProduct(p.productId)}
-                              > </Controls.Button>
-                        </TableCell>
-                        </TableRow>
+            <TableCell align="right">{p.productName}</TableCell>
+            <TableCell align="right">{p.productDescription}</TableCell>
+            <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(p.productPrice)}</TableCell>
+            <TableCell align="right">{p.productAverageRating}</TableCell>
+            <TableCell align="right">{p.quantityOnHand}</TableCell>
+            <TableCell align="right">{matchCategories(p)}</TableCell>
+            <TableCell align="right">
+              <Controls.Button
+                onClick={() => addToCart(p)}
+                color="primary.light" 
+                text="Add To Cart"
+                startIcon={<AddCircleOutlineIcon />}
+              >
+              </Controls.Button>
+              <Controls.Button 
+                    aria-label="product list"
+                    color="primary.light" 
+                    text="View Product Details"
+                    startIcon={<AddCircleOutlineIcon />}
+                    onClick={() => viewProduct(p.productId)}
+                  > </Controls.Button>
+            </TableCell>
+          </TableRow>
         ))
     
         )} 
@@ -236,6 +237,7 @@ const matchCategories = (product) => {
               </Grid>
               <Paper><Grid> 
                 <TextField required id="standard"
+                variant="outlined"
                 label="Search By Name" 
                 defaultValue="" 
                 onChange={handleInputForProduct}

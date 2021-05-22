@@ -3,7 +3,7 @@ import axios from 'axios';
 class ServiceLayer {
 
     // Example to get Token
-    jwt = localStorage.getItem('token')
+    // jwt = localStorage.getItem('token')
     //return http.post('authentication/login',{headers: {Authorization: 'Bearer ' + jwt}}, data);
 
     // Request for User

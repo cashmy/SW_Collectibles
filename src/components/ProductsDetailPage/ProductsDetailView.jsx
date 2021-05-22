@@ -11,6 +11,7 @@ import jwtDecode from 'jwt-decode';
 
 
 function ProductsDetailView(props) {
+    debugger
     let url = props.location.pathname;
     let urlSplit = url.split("/");
     const productId = parseInt(urlSplit[2]);
