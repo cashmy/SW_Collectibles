@@ -8,6 +8,8 @@ import { Button } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import jwtDecode from 'jwt-decode';
+import PageHeader from '../PageHeader/PageHeader';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 
 function ProductsDetailView(props) {
@@ -243,8 +245,15 @@ function ProductsDetailView(props) {
 
     return (
         <div>
+            <div style={{marginBottom: '45px'}}>
+            <PageHeader 
+            title="Product Detail View"
+            subtitle="Detailed View Of Product"
+            icon={<VisibilityIcon />}
+      />      
+            </div>
+
         <Paper>
-        <Grid container direction="row" spacing={5} style={{marginTop: "2rem"}}></Grid>
             <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
                 <Grid container item xs={4} spacing={3} className="grid" direction='column' alignItems="center" justify="center">
                     <div >    

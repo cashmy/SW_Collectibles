@@ -105,7 +105,6 @@ export default function PrimarySearchAppBar() {
   const [initialLogin, setInitialLogin] = React.useState(true)
 
   useEffect(() => {
-    debugger
     if (jwt) {
       const user = jwtDecode(jwt);
       getCartItems();
@@ -170,8 +169,10 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleMenuClose = () => {
+    localStorage.removeItem('token');
     setAnchorEl(null);
     handleMobileMenuClose();
+    window.location.href ='/login'
   };
 
   const handleMobileMenuOpen = (event) => {
