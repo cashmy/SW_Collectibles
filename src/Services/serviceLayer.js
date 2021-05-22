@@ -37,8 +37,7 @@ class ServiceLayer {
     //Request for Products
 
     getAllProducts(){
-        const jwt = localStorage.getItem('token')
-        return axios.get('https://localhost:44394/api/Products', {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.get('https://localhost:44394/api/Products');
     }
 
     getProductById(productId){
@@ -73,9 +72,14 @@ class ServiceLayer {
         return axios.put(`https://localhost:44394/api/ProductReview/${productId}/review`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    createReview(data){
+    addRating(id, productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.post('https://localhost:44394/api/ProductReview/create', data, {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.post(`https://localhost:44394/api/ProductReview/rating/${id}/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}})
+    }
+
+    addReview(id, productId, data){
+        const jwt = localStorage.getItem('token')
+        return axios.post(`https://localhost:44394/api/ProductReview/review/${id}/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     deleteReview(productId){
@@ -88,6 +92,10 @@ class ServiceLayer {
     getCategories(){
         const jwt = localStorage.getItem('token')
         return axios.get('https://localhost:44394/api/Category', {headers: {Authorization: 'Bearer ' + jwt}});
+    }
+    getCategory(categoryId){
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/Category/${categoryId}`, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     createCategory(data){
@@ -113,9 +121,9 @@ class ServiceLayer {
         return axios.get('https://localhost:44394/api/ShoppingCart/', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    addToCart(data){
+    addToCart(productId, data){
         const jwt = localStorage.getItem('token')
-        return axios.post('https://localhost:44394/api/ShoppingCart/', data, {headers: {Authorization: 'Bearer ' + jwt}})
+        return axios.post(`https://localhost:44394/api/ShoppingCart/${productId}`, data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     editCart(productId, data){

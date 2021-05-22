@@ -7,13 +7,7 @@
 
 .MuiGrid-spacing-xs-3{
     margin: 0;
-    /* border: 1px solid red; */
 }
-
-/* #midProductDetailGrid {
-    margin-left: 12px;
-    margin-right: 12px;
-} */
 
 .product__img{
     width: 250px;
@@ -31,7 +25,20 @@
     line-height: 3;
 }
 
+.star{
+    cursor: pointer;
+    transition: color 200ms;
+}
 
+input[type='radio'] {
+    display: none;
+}
+
+.review__input {
+    border: 1px solid black;
+    margin: 7px;
+    width: 30rem;
+}
 
 #Reviews {
     margin: 5rem;

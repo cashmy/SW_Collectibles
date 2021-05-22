@@ -109,7 +109,7 @@ export default function BasicTable() {
                     <TableBody>
                         {cartItems.map((cartItem, i) => (
                         <TableRow key={i}>
-                          <TableCell component="th" scope="row">{cartItem.productName}</TableCell>
+                       <TableCell component="th" scope="row">{cartItem.productName}</TableCell>
                           <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartItem.extPrice)}</TableCell>
                           <TableCell align="right">
                               <ButtonGroup size="small" aria-label="small outlined button group">
