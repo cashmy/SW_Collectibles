@@ -96,6 +96,19 @@ export default function BasicTable() {
       history.push(`productDetails/${productId}`);
   }
 
+  function handleCountInc(index, quantity) {
+    setCounter(counter+1)
+    console.log("Current status +: " +  index + ", " + quantity + ", " + counter + ", " + cartItems)
+    // setCartItems(...cartItems,
+    //   cartItems[index].quantity = quantity + 1)
+  }
+
+  function handleCountDec(index, quantity){
+    setCounter(counter - 1)
+    console.log("Current status -: " +  index + ", " + quantity + ", " + counter + ", " + cartItems)
+    // setCartItems(...cartItems,
+    //   cartItems[index].quantity = quantity - 1)
+  }
 
   return (
       <div div className={classes.layout}>
@@ -117,19 +130,22 @@ export default function BasicTable() {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cartItems.map((cartItem, i) => (
+                      {cartItems.map((cartItem, i) => (
+
                         <TableRow key={i}>
-                       <TableCell component="th" scope="row">{cartItem.productName}</TableCell>
+                          <TableCell component="th" scope="row">{cartItem.productName}</TableCell>
                           <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartItem.extPrice)}</TableCell>
                           <TableCell align="right">
                               <ButtonGroup size="small" aria-label="small outlined button group">
-                                   <Button disabled={counter >= 50 } onClick={()=> {setCounter(counter+1)}}> + </Button>
-                                  {<Button disabled>{cartItem.quantity}</Button>}
-                                  {<Button disabled={counter <= 0} onClick={() => {setCounter(counter - 1) }}> - </Button>}
+                                   <Button disabled={counter >= 50 } onClick={()=> {handleCountInc(i,cartItem.quantity)} }
+                                   > + </Button>
+                                  {<Button disabled>{cartItem.quantity} - {counter} </Button>}
+                                  {<Button disabled={counter <= 1} onClick={() => {handleCountDec(i,cartItem.quantity)} } 
+                                  > - </Button>}
                               </ButtonGroup>
                           </TableCell>
                           <TableCell align="right">
-                          <IconButton
+                            <IconButton
                               color="primary"
                               onClick={() => productDetails(cartItem.productId)}
                             >
