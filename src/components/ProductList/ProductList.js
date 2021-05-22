@@ -176,6 +176,7 @@ const matchCategories = (product) => {
 
     })
     setProducts(filteredProducts)
+    console.log(filteredProducts)
   }
 
   // const handleInputForCategories = (event) => {
