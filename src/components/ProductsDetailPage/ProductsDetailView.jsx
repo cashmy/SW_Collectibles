@@ -13,7 +13,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 
 function ProductsDetailView(props) {
-    debugger
+
     let url = props.location.pathname;
     let urlSplit = url.split("/");
     const productId = parseInt(urlSplit[2]);
@@ -41,7 +41,7 @@ function ProductsDetailView(props) {
     }, [])
 
     useEffect(() => {
-
+        // Trigger a re-render on change of reviews
     }, [reviews])
 
 
