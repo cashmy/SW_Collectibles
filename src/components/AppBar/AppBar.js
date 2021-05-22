@@ -23,6 +23,7 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Controls from '../controls/Controls';
 import Link from '@material-ui/core/Link';
 import ServiceLayer from '../../Services/serviceLayer';
+import jwtDecode from 'jwt-decode';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,18 +39,13 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
-  search: {
+  role: {
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
     marginRight: theme.spacing(2),
-    marginLeft: 0,
+    marginLeft: theme.spacing(3),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
+      marginLeft: theme.spacing(6),
       width: 'auto',
     },
   },
@@ -95,23 +91,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+
+  const jwt = localStorage.getItem('token');
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [cartCount, setCartCount] = React.useState(0);
   const [mailCount, setMailCount] = React.useState(0);
-  const [notificationCount, setNoficatonCount] = React.useState(0);
+  const [notificationCount, setNotificationCount] = React.useState(0);
+  const [sellerTitleDisabled, setSellerTitleDisabled] = React.useState(true);
+  const [buyerTitleDisabled, setBuyerTitleDisabled] = React.useState(true);
+  const [initialLogin, setInitialLogin] = React.useState(true)
 
   useEffect(() => {
-    getCartItems()
-    // getmailCount here
-    // getNotificationCount here
-  },[])
+    debugger
+    if (jwt) {
+      const user = jwtDecode(jwt);
+      getCartItems();
+      getMailItems();
+      getNotificationItems();
+      setInitialLogin(false)
+      if (user.isSeller) {
+        setSellerTitleDisabled(false);
+      } else {
+
+        setBuyerTitleDisabled(false);
+      }
+    } else {
+      setInitialLogin(true)
+    }
+  },[jwt])
+
 
   async function getCartItems(e){
     try{
         const response = await ServiceLayer.getItemCount();
-        console.log(response.data[0].count);
         setCartCount(response.data[0].count);
     }
     catch(e){
@@ -119,6 +134,30 @@ export default function PrimarySearchAppBar() {
     }
   }
 
+  async function getMailItems() {
+    try{
+      // ** Add code once Mail endpoints have been created
+      //const response = await ServiceLayer.getMailCount();
+      //setMailCount(response.data[0].count)
+      setMailCount(0)
+    } 
+    catch(e){
+      console.log('GetMailCount API call unsuccessful', e)
+    }
+  }
+
+  async function getNotificationItems() {
+    try{
+      // ** Add code once Notification endpoints have been created
+      //const response = await ServiceLayer.getNotificationCount();
+      //setMailCount(response.data[0].count)
+      setNotificationCount(0)
+    } 
+    catch(e){
+      console.log('GetMailCount API call unsuccessful', e)
+    }
+  }
+    
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -240,7 +279,10 @@ export default function PrimarySearchAppBar() {
               Star Wars Collectibles
             </Typography>
           </Link>
-
+          <div className={classes.role}>
+          {buyerTitleDisabled === false && <Typography className={classes.title} variant="h6" noWrap> Buyer </Typography> }
+          {sellerTitleDisabled === false && <Typography className={classes.title} variant="h6" noWrap> Seller </Typography> }  
+          </div>
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -260,62 +302,60 @@ export default function PrimarySearchAppBar() {
 
 
           {/* BUYER: Conditional Links */}
-            <Link component={RouterLink} to={'productList'}  >
+          {initialLogin === false && <Link component={RouterLink} to={'productList'}  >
               <Controls.Button 
                 aria-label="product list" 
                 color="primary.light" 
                 text="Products"
                 startIcon={<ListIcon />}
               >Products</Controls.Button>
-            </Link>
-            <Link component={RouterLink} to={'OrderList'}  >
+            </Link> }
+            {buyerTitleDisabled === false && <Link component={RouterLink} to={'OrderList'}  >
               <Controls.Button 
                 aria-label="order history" 
                 color="primary.light" 
                 text="Orders" 
                 startIcon={<HistoryIcon 
               />}>Orders</Controls.Button>
-            </Link>
+            </Link> }
                     
                     
           {/* SELLER: Conditional Links */}
-          <Link component={RouterLink} to={'categoryList'}  >
+          {sellerTitleDisabled === false &&<Link component={RouterLink} to={'categoryList'}  >
               <Controls.Button 
                 aria-label="category list" 
                 color="default" 
                 text="Categories" 
                 startIcon={<CategoryIcon 
               />}>Orders</Controls.Button>
-            </Link>
+            </Link> }
 
           {/* Icons with Badges */}
-            <Link component={RouterLink} to={'shoppingCart'} className={classes.navlink}>
+          {buyerTitleDisabled === false && <Link component={RouterLink} to={'shoppingCart'} className={classes.navlink}>
               <IconButton aria-label="show cart items" color="inherit">
                 <Badge badgeContent={cartCount} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-            </Link>
+            </Link> }
             
-            <Link component={RouterLink} to={'checkOut'} className={classes.navlink}>
+            {buyerTitleDisabled === false && <Link component={RouterLink} to={'checkOut'} className={classes.navlink}>
               <IconButton aria-label="goto checkout" color="inherit">
-
                   <CheckCircleOutlineIcon />
-  
               </IconButton>
-            </Link>
+            </Link> }
 
-            <IconButton aria-label="show new mails" color="inherit">
+            {initialLogin === false && <IconButton aria-label="show new mails" color="inherit">
               <Badge badgeContent={mailCount} color="secondary">
                 <MailIcon />
               </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            </IconButton> }
+            {initialLogin === false && <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={notificationCount} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
-            <IconButton
+            </IconButton> }
+            {initialLogin === false && <IconButton
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -324,7 +364,7 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> }
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
