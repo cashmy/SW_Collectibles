@@ -23,7 +23,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+  root: {
         flexGrow: 1,
       },
       grid: {
@@ -115,6 +115,9 @@ const matchCategories = (product) => {
 
  return productCategories
 }
+
+
+  
 
   async function getCategories(){
     try{
