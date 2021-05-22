@@ -17,13 +17,23 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
       },
-      grid: {
-        padding: theme.spacing(2.5),
+    layout: {
+      width: 'auto',
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up(800 + theme.spacing(2) * 2)]: {
+        width: 800,
+        marginLeft: 'auto',
+        marginRight: 'auto',
       },
-      paper: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-      },
+    },
+    grid: {
+      padding: theme.spacing(2.5),
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: 'auto',
+    },
 
   table: {
     minWidth: 650,
@@ -35,8 +45,8 @@ function createData(ordernumber, price, date, actions) {
 }
 
 const rows = [
-  createData('0001', 100, "01/01/2001"),
-  createData('0002', 200, "01/01/2001"),
+  createData('0001', 100.00, "01/01/2001"),
+  createData('0002', 200.00, "01/01/2001"),
   createData('0003', 300,"01/01/2001"),
   createData('0004', 400, "01/01/2001"),
   createData('0005', 500, "01/01/2001")
@@ -46,7 +56,7 @@ export default function BasicTable() {
   const classes = useStyles();
 
   return (
-      <div>
+      <div className={classes.layout}>
       <PageHeader 
         title="Order History"
         subtitle="Full listing of all your complete orders."
@@ -70,14 +80,13 @@ export default function BasicTable() {
                         <TableCell component="th" scope="row">
                             {row.ordernumber}
                         </TableCell>
-                        <TableCell align="right">{row.price}</TableCell>
+                        <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(row.price)}</TableCell>
+                        
                         <TableCell align="right">{row.date}</TableCell>
                         <TableCell align="right">                       
                         <Link to = {'orderDetails'}>
                           Order Details
                         </Link></TableCell>
-
- 
                         </TableRow>
                     ))}
                     </TableBody>

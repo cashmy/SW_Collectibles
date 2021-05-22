@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,73 +12,93 @@ import Paper from '@material-ui/core/Paper';
 import PageHeader from '../PageHeader/PageHeader';
 import HistoryIcon from '@material-ui/icons/History';
 import ServiceLayer from '../../Services/serviceLayer';
+import Controls from '../controls/Controls'
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+      },
+      layout: {
+        width: 'auto',
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up(800 + theme.spacing(2) * 2)]: {
+          width: 800,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        },
+      },
+      grid: {
+        padding: theme.spacing(2.5),
+      },
+      paper: {
+        padding: theme.spacing(2),
+        margin: 'auto',
+      },
+
+  table: {
+    minWidth: 650,
+  },
+}));
 
 function OrderDetails(){
+  const history = useHistory();
+  const classes = useStyles();
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            flexGrow: 1,
-          },
-          grid: {
-            padding: theme.spacing(2.5),
-          },
-          paper: {
-            padding: theme.spacing(2),
-            margin: 'auto',
-          },
-    
-      table: {
-        minWidth: 650,
-      },
-    }));
+  const [details, setOrderDetails] = useState([]);
 
-    const [details, setOrderDetails] = useState([]);
+  useEffect(() => {
+      getDetails();
 
-    useEffect(() => {
-        getDetails();
+    },[])
 
-      },[])
+  async function getDetails(e){
+      debugger;
+      try{
+      
+          const response = await ServiceLayer.getOrderDetails();
+          setOrderDetails(response.data);
+          
+      }
+      catch(e){
+          console.log('API call unsuccessful', e.response.data)
+      }
+  }
 
-    async function getDetails(e){
-        debugger;
-        try{
-        
-            const response = await ServiceLayer.getOrderDetails();
-            setOrderDetails(response.data);
-           
-        }
-        catch(e){
-            console.log('API call unsuccessful', e.response.data)
-        }
-    }
-
-
-    const classes = useStyles();
+  function handleCancel() {
+    history.back();
+  }
 
     return (
-        <div>
+        <div className={classes.layout}>
                   <PageHeader 
-        title="Product List"
-        subtitle="Complete list of all available products for sale."
+        title="Order Information"
+        subtitle="All information for the specific order you selected."
         icon={<HistoryIcon/>}
       /> 
           
-        <div><center style={{marginTop: "2rem"}}>Order Number: Date Purchased</center></div>
         <Grid container spacing={2} className={classes.grid} >
           <Paper className={classes.paper} >
+          <Grid item>
+            <center style={{marginTop: "2rem"}}>Order Number: Date Purchased</center>
+          </Grid>
+
           <Grid item xs={2} style={{marginBottom: "2rem"}}>
             Address Line 1 & address line 2
           </Grid>
+          
           <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
-          Town
+            Town
           </Grid>
+          
           <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
               State
           </Grid>
+          
           <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
             Zipcode
           </Grid>
+          
           <Grid item xs={2} style={{marginBottom: "2rem"}} align="center">
             Country
           </Grid>
@@ -107,6 +128,11 @@ function OrderDetails(){
                        </TableBody>
                 </Table>
             </TableContainer>
+            <Controls.Button
+              color='primary'
+              text='Cancel'
+              onClick={handleCancel}
+            />
         </Paper>
     </Grid>
                 
