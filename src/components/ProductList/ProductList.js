@@ -40,6 +40,7 @@ function ListProducts() {
   const [categories, setCategories] = useState([])
   const classes = useStyles();
   const [searching, setSearching]= useState([])
+  const [selectedCategory, setSelectedCategory] = useState(null)
 
   const addToCart = (product, i) => {
     let cart = []
@@ -58,25 +59,55 @@ function ListProducts() {
     getCategories();
   },[])
 
-async function getProducts(e){
+async function getProducts(){
 
     try{
         const response = await ServiceLayer.getAllProducts();
         setProducts(response.data);
     }
-    catch(e){
-        console.log('API call unsuccessful', e)
+    catch{
+        console.log('API call unsuccessful')
     }
   }
 
+  // async function getCategoryId(id){
+  //   debugger;
+  //   let chosenCategory;
+  //   try{
+  //     const response = await ServiceLayer.getCategoryById(id);
+  //     console.log(response.data);
+  //     setSelectedCategory(response.data);
 
-  async function getCategories(e){
+  //   }
+  //   catch{
+  //   console.log('API call unsucessful', chosenCategory)
+  //   }
+  // }
+
+const matchCategories = (product) => {
+
+  let selectedCategory;
+  
+
+ categories.map(category => {
+   if(product.categoryId === category.categoryId){
+    selectedCategory = category.categoryDescription
+   }
+ })
+ return selectedCategory
+}
+
+
+  
+
+  async function getCategories(){
     try{
         const response = await ServiceLayer.getCategories();
         setCategories(response.data);
+        console.log(response.data);
     }
-    catch(e){
-        console.log('API call unsuccessful', e)
+    catch{
+        console.log('API call unsuccessful')
     }
   }
    const mapProducts = () => {
@@ -88,7 +119,7 @@ async function getProducts(e){
                         <TableCell align="right">{p.productPrice}</TableCell>
                         <TableCell align="right">{p.productAverageRating}</TableCell>
                         <TableCell align="right">{p.quantityOnHand}</TableCell>
-                        <TableCell align="right">{p.categoryId}</TableCell>
+                        <TableCell align="right">{matchCategories(p)}</TableCell>
                         <TableCell align="right">
                           <Controls.Button
                             onClick={() => addToCart(products.product, i)}
@@ -110,13 +141,12 @@ async function getProducts(e){
     
         )} 
 
-  const handleInput = (event) => {
+  const handleInputForProduct = (event) => {
 
    let targetValue = event.target.value;
     console.log(event.target.value)
     
     const filteredProducts = products.filter(element => {
-      debugger;
       if(event.target.value === ""){
         getProducts();
         element = products;
@@ -127,10 +157,33 @@ async function getProducts(e){
         console.log(element)  
         return element
       };
+
     })
     console.log(filteredProducts)
     setProducts(filteredProducts)
   }
+
+  // const handleInputForCategories = (event) => {
+
+  //   let targetValue = event.target.value;
+  //    console.log(event.target.value)
+     
+  //    const filteredCategories = categories.filter(element => {
+  //      if(event.target.value === ""){
+  //        getCategory();
+  //        element = categories;
+  //        return element
+  //      }
+     
+  //      else if (element.categoryDescription.includes(targetValue)){
+  //        console.log(element)  
+  //        return element
+  //      };
+ 
+  //    })
+  //    console.log(filteredCategories)
+  //    setProducts(filteredCategories)
+  //  }
   
 
 
@@ -162,7 +215,7 @@ async function getProducts(e){
                 <TextField required id="standard"
                 label="Search By Name" 
                 defaultValue="" 
-                onChange={handleInput}
+                onChange={handleInputForProduct}
                  />
                 </Grid></Paper>
       <Grid container spacing={2} className={classes.grid} >

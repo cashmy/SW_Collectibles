@@ -94,6 +94,10 @@ class ServiceLayer {
         const jwt = localStorage.getItem('token')
         return axios.get('https://localhost:44394/api/Category', {headers: {Authorization: 'Bearer ' + jwt}});
     }
+    getCategory(categoryId){
+        const jwt = localStorage.getItem('token')
+        return axios.delete(`https://localhost:44394/api/Category/${categoryId}`, {headers: {Authorization: 'Bearer ' + jwt}})
+    }
 
     createCategory(data){
         const jwt = localStorage.getItem('token')
