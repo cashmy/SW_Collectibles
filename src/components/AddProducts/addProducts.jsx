@@ -6,6 +6,7 @@ import Controls from '../controls/Controls';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 // import { LocalConvenienceStoreOutlined, SettingsInputSvideoRounded } from '@material-ui/icons';
 // import serviceLayer from '../../Services/serviceLayer';
 
@@ -16,11 +17,24 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(800 + theme.spacing(2) * 2)]: {
+      width: 800,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
 }));
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
-
+  const history = useHistory();
+  function handleCancel(){
+    history.goBack();
+  }
   const [product, setProduct] = useState({
     productDescription: '',
     productPrice: '',
@@ -92,7 +106,7 @@ export default function FormPropsTextFields() {
 
     }
   return (
-    <form className={classes.root} noValidate onSubmit={handleSubmit}>
+    <form className={classes.layout} noValidate onSubmit={handleSubmit}>
       <div>
         <Paper>
         <Grid> <TextField required id="standard-required"
@@ -133,13 +147,17 @@ export default function FormPropsTextFields() {
        onChange={onChangeProductAverageRating}/></Grid>
        <Grid>  <Controls.Button 
                 type="submit"
-                text="add product now"
-                fullWidth
+                text="Add"
                 variant="contained"
                 color="primary"
                 className={classes.submit}
                 startIcon={<AddCircleOutlineIcon />}
-              > Add</Controls.Button></Grid>
+              > Add</Controls.Button>
+              <Controls.Button
+              color='default'
+              text='Cancel'
+              onClick={handleCancel}
+            /></Grid>
        {/* TODO: add upload image field */}
        {/* <Grid> <ImgField required id="standard-required" label="upload image of product" defaultValue="" /></Grid> */}
        </Paper>
