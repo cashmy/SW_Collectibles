@@ -19,6 +19,8 @@ import ServiceLayer from '../../Services/serviceLayer';
 import jwtDecode from 'jwt-decode';
 import TextField from '@material-ui/core/TextField';
 import { Category } from '@material-ui/icons';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -84,20 +86,6 @@ async function getProducts(){
         console.log('API call unsuccessful')
     }
   }
-
-  // async function getCategoryId(id){
-  //   debugger;
-  //   let chosenCategory;
-  //   try{
-  //     const response = await ServiceLayer.getCategoryById(id);
-  //     console.log(response.data);
-  //     setSelectedCategory(response.data);
-
-  //   }
-  //   catch{
-  //   console.log('API call unsucessful', chosenCategory)
-  //   }
-  // }
 
 const matchCategories = (product) => {
 
@@ -185,29 +173,10 @@ const matchCategories = (product) => {
 
     })
     setProducts(filteredProducts)
+    console.log(filteredProducts)
   }
 
-  // const handleInputForCategories = (event) => {
 
-  //   let targetValue = event.target.value;
-  //    console.log(event.target.value)
-     
-  //    const filteredCategories = categories.filter(element => {
-  //      if(event.target.value === ""){
-  //        getCategory();
-  //        element = categories;
-  //        return element
-  //      }
-     
-  //      else if (element.categoryDescription.includes(targetValue)){
-  //        console.log(element)  
-  //        return element
-  //      };
- 
-  //    })
-  //    console.log(filteredCategories)
-  //    setProducts(filteredCategories)
-  //  }
   
 
 
@@ -218,31 +187,25 @@ const matchCategories = (product) => {
         subtitle="Complete list of all available products for sale."
         icon={<ListIcon/>}
       />    
-      <Grid> <Link component={RouterLink} to={'addProducts'}  >
-              <Controls.Button 
-                aria-label="product list" 
-                color="primary.light" 
-                text="Add New Products"
-                startIcon={<AddCircleOutlineIcon />}
-              > Add New Products</Controls.Button>
+      <Grid container spacing={2} className={classes.grid}> <Link component={RouterLink} to={'addProducts'}  >
+              <Fab 
+              className={classes.addButton}
+              aria-label = "add"
+              color="secondary" 
+              text="Add New Products"
+              > <AddIcon/></Fab>
               </Link>
-              <Link component={RouterLink} to={'addCategory'}  >
-              <Controls.Button 
-                aria-label="product list" 
-                color="primary.light" 
-                text="Add A Category"
-                startIcon={<AddCircleOutlineIcon />}
-              > Add New Products</Controls.Button>
-              </Link>
+
               </Grid>
-              <Paper><Grid> 
-                <TextField required id="standard"
+              <center><Paper style = {{width:"38%"}}><Grid  className={classes.grid}>
+                <TextField
+                id= "filled-size-small"
                 variant="outlined"
-                label="Search By Name" 
+                label="Search Name or Category" 
                 defaultValue="" 
                 onChange={handleInputForProduct}
                  />
-                </Grid></Paper>
+                </Grid> </Paper></center>
       <Grid container spacing={2} className={classes.grid} >
           {/* <Paper className={classes.paper} > */}
             <TableContainer component={Paper}>

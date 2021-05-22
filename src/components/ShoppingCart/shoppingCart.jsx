@@ -75,7 +75,7 @@ export default function BasicTable() {
   async function deleteCart(productId){
     try{
         const response = await ServiceLayer.deleteCart(productId);
-        setCartItems(response.data);
+        getCart();
     }
     catch(e){
         console.log('Delete Cart Item API call unsuccessful')
