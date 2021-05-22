@@ -57,15 +57,6 @@ const useStyles = makeStyles((theme) => ({
 function ListCategories() {
   const [categories, setCategories] = useState([])
 
-const addToCart = (category, i) => {
-  let cart = []
-  if (i === 0){
-  cart.push(category);
-  }
-  console.log(cart);
-  return cart;
-}
-
 const history = useHistory();
 
 const editCategory = (category) => {
