@@ -100,15 +100,15 @@ async function getProducts(){
 
 const matchCategories = (product) => {
 
-  let selectedCategory;
-  
+  let productCategories;
 
  categories.map(category => {
    if(product.categoryId === category.categoryId){
-    selectedCategory = category.categoryDescription
+    productCategories = category.categoryDescription
    }
  })
- return selectedCategory
+
+ return productCategories
 }
 
 
@@ -162,6 +162,9 @@ const matchCategories = (product) => {
     
     const filteredProducts = products.filter(element => {
      let chosenCategory = categories;
+     let categoryNames = [];
+     categories.forEach(category => {categoryNames.push(category.categoryDescription)} )
+    console.log(categoryNames);
      console.log(chosenCategory)
       if(event.target.value === ""){
         getProducts();
