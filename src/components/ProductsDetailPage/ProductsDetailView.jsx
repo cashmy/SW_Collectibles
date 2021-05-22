@@ -22,8 +22,6 @@ function ProductsDetailView(props) {
     const user = jwtDecode(jwt);
     const userId = user.id;
     const userName = user.username;
-    console.log(user);
-    console.log(user.username)
 
     const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -76,8 +74,9 @@ function ProductsDetailView(props) {
         try{    
             const response = await ServiceLayer.addToCart(productId, data);
             console.log('Status Code', response.status);
+            alert(product.productName + ' has been added to your cart.');
         }catch(e){
-            console.log('API call unsuccessful', e.response.data);
+            console.log('API call unsuccessful', e);
         }
     }
 
@@ -93,7 +92,7 @@ function ProductsDetailView(props) {
             console.log(response.data);
         }
         catch(e){
-            console.log('API call unsuccessful', e.response.data);
+            console.log('API call unsuccessful', e);
         }
     }
 
