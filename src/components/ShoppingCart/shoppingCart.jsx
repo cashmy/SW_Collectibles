@@ -68,17 +68,17 @@ export default function BasicTable() {
         console.log(response.data)
     }
     catch(e){
-        console.log('API call unsuccessful', e)
+        console.log("Get User's Shopping Cart API call unsuccessful", e)
     }
   }
 
   async function deleteCart(productId){
     try{
         const response = await ServiceLayer.deleteCart(productId);
-        setCartItems(response.data);
+        getCart();
     }
     catch(e){
-        console.log('API call unsuccessful')
+        console.log('Delete Cart Item API call unsuccessful')
     }
   }
 
@@ -113,7 +113,7 @@ export default function BasicTable() {
                           <TableCell align="right">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartItem.extPrice)}</TableCell>
                           <TableCell align="right">
                               <ButtonGroup size="small" aria-label="small outlined button group">
-                                <Button disabled={counter >= 50 } onClick={()=> {setCounter(counter+1)}}> + </Button>
+                                   <Button disabled={counter >= 50 } onClick={()=> {setCounter(counter+1)}}> + </Button>
                                   {<Button disabled>{cartItem.quantity}</Button>}
                                   {<Button disabled={counter <= 0} onClick={() => {setCounter(counter - 1) }}> - </Button>}
                               </ButtonGroup>
@@ -121,13 +121,13 @@ export default function BasicTable() {
                           <TableCell align="right">
                           <IconButton
                               color="primary"
-                              onClick={() => productDetails(cartItem.ProductId)}
+                              onClick={() => productDetails(cartItem.productId)}
                             >
                               <VisibilityIcon />
                             </IconButton> 
                             <IconButton
                               color="secondary"
-                              onClick={() => deleteCart(cartItem.ProductId)}
+                              onClick={() => deleteCart(cartItem.productId)}
                             >
                               <DeleteIcon />
                             </IconButton>                       

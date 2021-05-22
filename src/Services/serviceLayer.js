@@ -3,8 +3,18 @@ import axios from 'axios';
 class ServiceLayer {
 
     // Example to get Token
-    jwt = localStorage.getItem('token')
+    // jwt = localStorage.getItem('token')
     //return http.post('authentication/login',{headers: {Authorization: 'Bearer ' + jwt}}, data);
+
+    getToken(){
+        const jwt = localStorage.getItem('token');
+        if(jwt){
+            return jwt;
+        }
+        else{
+            window.location.href="/login"
+        }
+    }
 
     // Request for User
     registerUser(data){
@@ -12,7 +22,7 @@ class ServiceLayer {
     }
 
     userLogin(data){
-        
+        this.getToken()
         return axios.post('https://localhost:44394/api/authentication/login', data);
     }
 
