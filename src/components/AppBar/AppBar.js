@@ -103,7 +103,7 @@ export default function PrimarySearchAppBar() {
   const [notificationCount, setNoficatonCount] = React.useState(0);
 
   useEffect(() => {
-    getCartItems()
+    //getCartItems()
     // getmailCount here
     // getNotificationCount here
   },[])
@@ -131,8 +131,10 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleMenuClose = () => {
+    localStorage.removeItem('token');
     setAnchorEl(null);
     handleMobileMenuClose();
+    window.location.href ='/login'
   };
 
   const handleMobileMenuOpen = (event) => {
