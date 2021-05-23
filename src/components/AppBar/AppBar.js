@@ -274,7 +274,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Link component={RouterLink} to={''} className={classes.navlink}>
+          <Link component={RouterLink} to={'productList'} className={classes.navlink}>
             <Typography className={classes.title} variant="h6" noWrap>
               Star Wars Collectibles
             </Typography>
