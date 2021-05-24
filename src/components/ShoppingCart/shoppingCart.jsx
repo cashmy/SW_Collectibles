@@ -109,8 +109,13 @@ export default function BasicTable() {
     }
   }
 
-  const productDetails = (productId) => {
-      history.push(`productDetails/${productId}`);
+  const productDetails = (product) => {
+    let id = product;
+    history.push({
+      pathname: '/productDetails',
+      search: `?query=${product}`,
+      state: {productId: id}
+    })
   }
 
   async function updateCart(productId, body){
@@ -183,7 +188,7 @@ export default function BasicTable() {
                           <TableCell align="right">
                             <IconButton
                               color="primary"
-                              onClick={() => productDetails(cartItem.productId)}
+                              onClick={() => productDetails(cartItem)}
                             >
                               <VisibilityIcon />
                             </IconButton> 
