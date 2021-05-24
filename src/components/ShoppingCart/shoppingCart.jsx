@@ -188,7 +188,7 @@ export default function BasicTable() {
                           <TableCell align="right">
                             <IconButton
                               color="primary"
-                              onClick={() => productDetails(cartItem)}
+                              onClick={() => productDetails(cartItem.productId)}
                             >
                               <VisibilityIcon />
                             </IconButton> 
