@@ -68,9 +68,14 @@ function ListProducts() {
     }
 }
   const history = useHistory();
-  
+
   const viewProduct = (product) => {
-    history.push(`productDetails/${product}`);
+    let id = product;
+    history.push({
+      pathname: '/productDetails',
+      search: `?query=${product}`,
+      state: {productId: id}
+    })
   }
 
   useEffect(() => {
@@ -112,8 +117,6 @@ const matchCategories = (product) => {
  return productCategories
 }
 
-
-  
 
   async function getCategories(){
     try{
