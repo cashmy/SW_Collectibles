@@ -65,13 +65,12 @@ export default function FormPropsTextFields() {
 
   async function handleSubmit(event){
     event.preventDefault();
-    debugger;
     const data = {
       productDescription: product.productDescription,
       productPrice:product.productPrice,
       quantityOnHand: product.quantityOnHand,
       categoryId: product.categoryId,
-      productAverageRating: product.productAverageRating,
+     // productAverageRating: product.productAverageRating,
       productName: product.productName
   }
   
@@ -84,7 +83,7 @@ export default function FormPropsTextFields() {
       productPrice: data.productPrice,
       quantityOnHand: data.quantityOnHand,
       categoryId:data.categoryId,
-      productAverageRating: data.productAverageRating,
+      //productAverageRating: data.productAverageRating,
       productName: data.productName
     });
     return(
@@ -158,7 +157,7 @@ export default function FormPropsTextFields() {
         <TextField 
           variant="outlined"
           required id="standard-required" 
-          label="Category"
+          label="Category Id"
           defaultValue="" 
           value={product.categoryId}
           onChange={onChangeCategoryId}/>

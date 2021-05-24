@@ -105,6 +105,7 @@ async function getCategories(e){
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                     <TableRow>
+                        <TableCell align="right">Category Id</TableCell>
                         <TableCell align="right">Description</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
@@ -113,6 +114,7 @@ async function getCategories(e){
                     {categories.map((category, i) => (
                         <TableRow key={i}>
 
+                        <TableCell align="right">{category.categoryId}</TableCell>
                         <TableCell align="right">{category.categoryDescription}</TableCell>
                         <TableCell align="right">
                           <IconButton

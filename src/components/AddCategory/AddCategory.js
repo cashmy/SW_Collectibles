@@ -43,7 +43,6 @@ export default function FormPropsTextFields() {
 
   async function handleSubmit(event){
     event.preventDefault();
-    debugger;
     const data = {
     categoryDescription: category.categoryDescription
   }
